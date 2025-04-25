@@ -15,6 +15,15 @@ public class Dades {
     public final static float PENALITZACIO_EXCES_POTENCIA = 250;
 
     // Afegir atributs:
+    private VariableUniforme variableUniforme;
+    private int insercioBarres;
+    private Reactor reactor;
+    private SistemaRefrigeracio sistemaRefrigeracio;
+    private GeneradorVapor generadorVapor;
+    private Turbina turbina;
+    private Bitacola bitacola;
+    private int dia;
+    private float guanysAcumulats;
 
     public Dades(){
         // Inicialitza Atributs

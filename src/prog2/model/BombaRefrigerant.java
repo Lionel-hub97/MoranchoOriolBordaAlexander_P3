@@ -3,24 +3,37 @@ package prog2.model;
 import prog2.vista.CentralUBException;
 
 public class BombaRefrigerant implements InBombaRefrigerant {
+
+    private VariableUniforme variableUniforme;
+    private int id;
+    private boolean activitat;
+    private boolean foraDeServei;
+
+    public BombaRefrigerant(int id, VariableUniforme variableUniforme) {
+        this.id = id;
+        this.variableUniforme = variableUniforme;
+    }
+
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
     public void activa() throws CentralUBException {
-
+        if (foraDeServei)
+            throw new CentralUBException("EXCEPCIO: Central fora de servei");
+        this.activitat = true;
     }
 
     @Override
     public void desactiva() {
-
+        this.activitat = false;
     }
 
     @Override
     public boolean getActivat() {
-        return false;
+        return activitat;
     }
 
     @Override
