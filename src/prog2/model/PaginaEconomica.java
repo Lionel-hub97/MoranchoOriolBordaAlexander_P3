@@ -2,7 +2,7 @@ package prog2.model;
 
 public class PaginaEconomica extends PaginaBitacola{
 
-    private float potencia;
+    private float demandaPotencia;
     private float potenciaGenerada;
     private float percentatgePotenciaSatisfeta;
     private float beneficis;
@@ -12,7 +12,7 @@ public class PaginaEconomica extends PaginaBitacola{
 
     public PaginaEconomica(int dia, float potencia, float potenciaGenerada, float percentatgePotenciaSatisfeta, float beneficis, float penalitzacioExcesProduccio, float costOperatiu, float guanysAcumulats) {
         super(dia);
-        this.potencia = potencia;
+        this.demandaPotencia = potencia;
         this.potenciaGenerada = potenciaGenerada;
         this.percentatgePotenciaSatisfeta = percentatgePotenciaSatisfeta;
         this.beneficis = beneficis;
@@ -22,11 +22,11 @@ public class PaginaEconomica extends PaginaBitacola{
     }
 
     //GETTERS i SETTERS
-    public float getPotencia() {
-        return potencia;
+    public float getDemandaPotencia() {
+        return demandaPotencia;
     }
-    public void setPotencia(float potencia) {
-        this.potencia = potencia;
+    public void setDemandaPotencia(float demandaPotencia) {
+        this.demandaPotencia = demandaPotencia;
     }
     public float getPotenciaGenerada() {
         return potenciaGenerada;
@@ -63,5 +63,18 @@ public class PaginaEconomica extends PaginaBitacola{
     }
     public void setGuanysAcumulats(float guanysAcumulats) {
         this.guanysAcumulats = guanysAcumulats;
+    }
+
+    //OTROS METODOS
+    public String toString(){
+        return "# Pàgina Econòmica\n" +
+                "- Dia: "+ getDia() +"\n" +
+                "- Demanda de Potència:"+ getDemandaPotencia() +"\n" +
+                "- Potència Generada: "+ getPotenciaGenerada() +"\n" +
+                "- Demanda de Potència Satisfeta: "+ getPercentatgePotenciaSatisfeta() +" %\n" +
+                "- Beneficis: "+ getBeneficis() +" Unitats Econòmiques\n" +
+                "- Penalització Excés Producció: "+ getPenalitzacioExcesProduccio() +" Unitats Econòmiques\n" +
+                "- Cost Operatiu: "+ getCostOperatiu() +" Unitats Econòmiques\n" +
+                "- Guanys acumulats: "+ getGuanysAcumulats() +" Unitats Econòmiques\n";
     }
 }
