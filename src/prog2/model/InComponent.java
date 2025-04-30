@@ -30,7 +30,7 @@ public interface InComponent {
     public boolean getActivat();
 
     /**
-     * Revisa el component. Com a resultat de la revisió, podria podria sorgir 
+     * Revisa el component. Com a resultat de la revisió, podria sorgir
      * una incidència que s'ha de registrar dins d'una pàgina d'incidències.
      * @param p Objecte de tipus PaginaIncidencies.
      */

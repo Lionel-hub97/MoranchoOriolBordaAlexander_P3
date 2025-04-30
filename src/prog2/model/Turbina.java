@@ -2,7 +2,7 @@ package prog2.model;
 
 import prog2.vista.CentralUBException;
 
-public class Component implements InComponent {
+public class Turbina implements InComponent{
     @Override
     public void activa() throws CentralUBException {
 
