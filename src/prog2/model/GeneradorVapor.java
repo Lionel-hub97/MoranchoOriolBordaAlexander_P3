@@ -6,6 +6,12 @@ public class GeneradorVapor implements InComponent{
 
     private boolean activitat;
 
+    public GeneradorVapor() {
+        this.activitat = false;
+    }
+
+    //METODOS IMPLEMENTADOS
+
     @Override
     public void activa() throws CentralUBException {
         this.activitat = true;
@@ -37,8 +43,8 @@ public class GeneradorVapor implements InComponent{
     @Override
     public float calculaOutput(float input) {
         if(activitat){
-            return 25;
+            return input * 0.9f;
         }
-        return input * 0.9f;
+        return 25;
     }
 }
