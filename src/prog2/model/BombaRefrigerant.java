@@ -12,6 +12,7 @@ public class BombaRefrigerant implements InBombaRefrigerant {
     public BombaRefrigerant(VariableUniforme variableUniforme, int id) {
         this.id = id;
         this.variableUniforme = variableUniforme;
+        this.activitat = false;
     }
 
     //GETTERS i SETTERS

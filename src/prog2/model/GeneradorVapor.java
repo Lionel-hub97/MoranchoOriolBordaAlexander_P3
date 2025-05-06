@@ -7,7 +7,7 @@ public class GeneradorVapor implements InComponent{
     private boolean activitat;
 
     public GeneradorVapor() {
-        this.activitat = false;
+        this.activitat = true;
     }
 
     //METODOS IMPLEMENTADOS

@@ -26,7 +26,7 @@ public class SistemaRefrigeracio implements InComponent{
 
     //METODOS IMPLEMENTADOS
 
-    public void afegirBombaRefrigerant(BombaRefrigerant b) throws CentralUBException {
+    public void afegirBomba(BombaRefrigerant b) {
         bombesRefrigerants.add(b);
     }
     @Override
