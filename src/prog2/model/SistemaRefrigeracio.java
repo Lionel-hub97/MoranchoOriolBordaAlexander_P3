@@ -35,7 +35,7 @@ public class SistemaRefrigeracio implements InComponent{
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
 
-            if(bomba.getForaDeServei() == false){
+            if(!bomba.getForaDeServei()){
                 bomba.activa();
             }
         }
