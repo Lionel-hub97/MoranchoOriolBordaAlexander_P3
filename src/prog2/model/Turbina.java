@@ -1,35 +1,52 @@
 package prog2.model;
 
-import prog2.vista.CentralUBException;
+
 
 public class Turbina implements InComponent{
+
+    private boolean activitat;
+
+    public Turbina() {
+        this.activitat = true;
+    }
     @Override
-    public void activa() throws CentralUBException {
+    public void activa() {
+        this.activitat = true;
+
 
     }
 
     @Override
     public void desactiva() {
-
+        //NO SE USA
     }
 
     @Override
     public boolean getActivat() {
-        return false;
+        return activitat;
     }
 
     @Override
     public void revisa(PaginaIncidencies p) {
-
+        //NO HACE NADA
     }
 
     @Override
     public float getCostOperatiu() {
-        return 0;
+        return 20;
     }
 
     @Override
     public float calculaOutput(float input) {
-        return 0;
+        if(input > 100 && activitat){
+            return input*2;
+        } else {
+            return 0;
+
+        }
+        //output =
+        // si no activat                        ->  0
+        // si activat i input < 100             ->  0
+        // si activat i input ≥ 100             ->  input ∗ 2
     }
 }
