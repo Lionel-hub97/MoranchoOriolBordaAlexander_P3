@@ -33,14 +33,14 @@ public class BombaRefrigerant implements InBombaRefrigerant {
     @Override
     public float getCapacitat() {
         if (activitat) {
-            return
+            return 250;
         }
         return 0;
     }
 
     @Override
     public float getCostOperatiu() {
-        return 0;
+        return 130; //En teoria el sistema de refrigeració és 130*nº Bombes, per tant retornarà 130 per fer-lo servir a sistema refrigeració
     }
 
     //OTROS METODOS
