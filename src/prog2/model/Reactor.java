@@ -7,7 +7,10 @@ public class Reactor implements InComponent{
     private boolean activitat;
     private float temperatura;
 
-    public Reactor(){}
+    public Reactor(){
+        this.activitat = false;
+        this.temperatura = 25f;
+    }
 
     //GETTERS i SETTERS
     public float getTemperatura() {
@@ -23,6 +26,9 @@ public class Reactor implements InComponent{
     public void activa() throws CentralUBException {
         if (1000 < temperatura){
             throw new CentralUBException("No es pot activar el reactor mentre es superi la temperatura màxima de 1.000 graus.");
+        }
+        else{
+            activitat = true;
         }
     }
 
