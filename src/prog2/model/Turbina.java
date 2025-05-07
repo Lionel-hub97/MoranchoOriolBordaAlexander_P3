@@ -9,16 +9,17 @@ public class Turbina implements InComponent{
     public Turbina() {
         this.activitat = true;
     }
+
+    //METODOS IMPLEMENTADOS
+
     @Override
     public void activa() {
         this.activitat = true;
-
-
     }
 
     @Override
     public void desactiva() {
-        //NO SE USA
+        this.activitat = false;
     }
 
     @Override
