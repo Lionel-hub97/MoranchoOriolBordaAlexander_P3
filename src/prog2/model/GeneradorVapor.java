@@ -13,7 +13,7 @@ public class GeneradorVapor implements InComponent{
     //METODOS IMPLEMENTADOS
 
     @Override
-    public void activa() throws CentralUBException {
+    public void activa() {
         this.activitat = true;
     }
 
