@@ -29,6 +29,7 @@ public class SistemaRefrigeracio implements InComponent{
     public void afegirBomba(BombaRefrigerant b) {
         bombesRefrigerants.add(b);
     }
+
     @Override
     public void activa() throws CentralUBException {
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
@@ -47,7 +48,7 @@ public class SistemaRefrigeracio implements InComponent{
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
 
-            if(bomba.getForaDeServei() == false){
+            if(!bomba.getForaDeServei()){
                 bomba.desactiva();
             }
         }
@@ -59,7 +60,7 @@ public class SistemaRefrigeracio implements InComponent{
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
 
-            if(bomba.getForaDeServei() == false && activitat == true){
+            if(!bomba.getForaDeServei() && activitat){
                 return true;
             }
         }
@@ -72,7 +73,7 @@ public class SistemaRefrigeracio implements InComponent{
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(bomba.getForaDeServei() == false){
+            if(!bomba.getForaDeServei()){
                 bomba.revisa(p);
             }
         }
