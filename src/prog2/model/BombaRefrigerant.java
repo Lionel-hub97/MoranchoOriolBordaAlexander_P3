@@ -65,4 +65,9 @@ public class BombaRefrigerant implements InBombaRefrigerant {
             p.afegeixIncidencia("La bomba refrigerant " + id + " està fora de servei");
         }
     }
+    public String toString(){
+        return "ID="+ id +", " +
+                "Activitat="+ activitat +", " +
+                "Fora de servei="+ foraDeServei +"\n";
+    }
 }
