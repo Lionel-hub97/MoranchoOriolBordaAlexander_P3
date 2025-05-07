@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 public class SistemaRefrigeracio implements InComponent{
 
-    private boolean activitat;
     private ArrayList<BombaRefrigerant> bombesRefrigerants;
 
     public SistemaRefrigeracio(){
@@ -60,7 +59,7 @@ public class SistemaRefrigeracio implements InComponent{
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
 
-            if(!bomba.getForaDeServei() && activitat){
+            if(!bomba.getForaDeServei() && bomba.getActivat()){
                 return true;
             }
         }
@@ -69,7 +68,7 @@ public class SistemaRefrigeracio implements InComponent{
 
     @Override
     public void revisa(PaginaIncidencies p) {
-        //NO HACE NADA
+        //NO HACE NADA porque??? pusiste esto
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
@@ -85,7 +84,7 @@ public class SistemaRefrigeracio implements InComponent{
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(bomba.getForaDeServei() == false){
+            if(!bomba.getForaDeServei()){
                 cost += bomba.getCostOperatiu();
             }
         }
@@ -99,7 +98,7 @@ public class SistemaRefrigeracio implements InComponent{
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(bomba.getForaDeServei() == false){
+            if(!bomba.getForaDeServei()){
                 output += bomba.getCapacitat();
 
             }
