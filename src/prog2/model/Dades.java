@@ -249,7 +249,11 @@ public class Dades implements InDades{
 
     @Override
     public float calculaPotencia() {
-        return turbina.calculaOutput(generadorVapor.calculaOutput(sistemaRefrigeracio.calculaOutput(reactor.calculaOutput(insercioBarres))));
+        return turbina.calculaOutput
+                (generadorVapor.calculaOutput
+                        (sistemaRefrigeracio.calculaOutput
+                                (reactor.calculaOutput
+                                        (insercioBarres))));
     }
 
     @Override
