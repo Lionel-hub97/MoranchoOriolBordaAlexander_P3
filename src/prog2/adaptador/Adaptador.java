@@ -10,8 +10,9 @@ import java.util.List;
 
 public class Adaptador {
     private Dades dades;
-    public Adaptador(Dades dades) {
-        this.dades = dades;
+
+    public Adaptador() {
+        this.dades = new Dades();
     }
 
     public String finalitzaDia(float demandaPotencia) {
