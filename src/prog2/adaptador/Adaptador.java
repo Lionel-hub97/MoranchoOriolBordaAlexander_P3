@@ -14,8 +14,8 @@ public class Adaptador {
         this.dades = dades;
     }
 
-    public Bitacola finalitzaDia(float demandaPotencia) {
-        return dades.finalitzaDia(demandaPotencia);
+    public String finalitzaDia(float demandaPotencia) {
+        return dades.finalitzaDia(demandaPotencia).toString();
     }
 
     public float getInsercioBarres() {
