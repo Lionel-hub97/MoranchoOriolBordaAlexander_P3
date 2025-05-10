@@ -68,7 +68,7 @@ public class CentralUB {
 
             switch (opcio) {
                 case GESTIO_BARRES_DE_CONTROL:
-                    gestioReactor(sc);
+                    gestioBarresDeControl(sc);
                     break;
                 case GESTIO_REACTOR:
                     gestioReactor(sc);
@@ -94,6 +94,13 @@ public class CentralUB {
                     finalitzaDia();
                     break;
                 case GUARDAR_DADES:
+                    System.out.println("Indica el nom de fitxer: ");
+                    try {
+                        adaptador.guardaDades(sc.nextLine());
+                    }
+                    catch (CentralUBException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case CARREGA_DADES:
                     break;
