@@ -176,9 +176,9 @@ public class Dades implements InDades, Serializable {
         dia += 1;
 
         // Guarda pàgines de bitacola
-        bitacola.afegeixPagina(paginaEconomica);
-        bitacola.afegeixPagina(paginaEstat);
-        bitacola.afegeixPagina(paginaIncidencies);
+        this.bitacola.afegeixPagina(paginaEconomica);
+        this.bitacola.afegeixPagina(paginaEstat);
+        this.bitacola.afegeixPagina(paginaIncidencies);
 
         // Retorna pàgines
         Bitacola bitacolaDia = new Bitacola();
@@ -274,6 +274,7 @@ public class Dades implements InDades, Serializable {
     @Override
     public Bitacola mostraBitacola() {
         return bitacola;
+
     }
 
     @Override

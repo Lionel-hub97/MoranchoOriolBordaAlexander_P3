@@ -77,13 +77,13 @@ public class CentralUB {
                     gestioSistemaRefrigeracio(sc);
                     break;
                 case MOSTRAR_ESTAT_CENTRAL:
-                    adaptador.mostraEstat();
+                    System.out.println(adaptador.mostraEstat());
                     break;
                 case MOSTRAR_BITACOLA:
-                    adaptador.mostraBitacola();
+                    System.out.println(adaptador.mostraBitacola());
                     break;
                 case MOSTRAR_INCIDENCIES:
-                    adaptador.mostraIncidencies();
+                    System.out.println(adaptador.mostraIncidencies());
                     break;
                 case OBTENIR_DEMANDA_SATISFETA_AMB_CONFIGURACIO_ACTUAL:
                     System.out.println("Demanda de Potencia: " + demandaPotencia);
