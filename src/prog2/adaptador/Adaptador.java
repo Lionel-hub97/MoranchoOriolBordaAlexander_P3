@@ -73,9 +73,10 @@ public class Adaptador {
 
     public void guardaDades(String camiDesti) throws CentralUBException {
         ObjectOutputStream sortida = null;
+        String filename = camiDesti + ".dat";
 
         try {
-            FileOutputStream fitxer = new FileOutputStream(camiDesti);
+            FileOutputStream fitxer = new FileOutputStream(filename);
             sortida = new ObjectOutputStream(fitxer);
 
             sortida.writeObject(dades);
