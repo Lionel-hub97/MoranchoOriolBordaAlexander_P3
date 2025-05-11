@@ -3,10 +3,11 @@ package prog2.model;
 
 import prog2.vista.CentralUBException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SistemaRefrigeracio implements InComponent{
+public class SistemaRefrigeracio implements InComponent, Serializable {
 
     private ArrayList<BombaRefrigerant> bombesRefrigerants;
 
@@ -68,7 +69,6 @@ public class SistemaRefrigeracio implements InComponent{
 
     @Override
     public void revisa(PaginaIncidencies p) {
-        //NO HACE NADA porque??? pusiste esto
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();

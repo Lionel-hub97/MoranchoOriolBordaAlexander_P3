@@ -1,6 +1,8 @@
 package prog2.model;
 
-public class PaginaEconomica extends PaginaBitacola{
+import java.io.Serializable;
+
+public class PaginaEconomica extends PaginaBitacola implements Serializable {
 
     private float demandaPotencia;
     private float potenciaGenerada;

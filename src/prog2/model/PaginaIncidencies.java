@@ -1,8 +1,9 @@
 package prog2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PaginaIncidencies extends PaginaBitacola {
+public class PaginaIncidencies extends PaginaBitacola implements Serializable {
 
     private ArrayList<String> incidencies;
 

@@ -55,10 +55,6 @@ public class Adaptador {
         return dades.calculaPotencia();
     }
 
-    public float getGuanysAcumulats() {
-        return dades.getGuanysAcumulats();
-    }
-
     public PaginaEstat mostraEstat() {
         return dades.mostraEstat();
     }

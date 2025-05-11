@@ -4,13 +4,14 @@
  */
 package prog2.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  *
  * @author Daniel Ortiz
  */
-public class VariableUniforme {
+public class VariableUniforme implements Serializable {
     private Random random;
 
     public VariableUniforme(long seed) {

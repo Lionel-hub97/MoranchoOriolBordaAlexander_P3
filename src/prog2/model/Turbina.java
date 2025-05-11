@@ -1,8 +1,9 @@
 package prog2.model;
 
 
+import java.io.Serializable;
 
-public class Turbina implements InComponent{
+public class Turbina implements InComponent, Serializable {
 
     private boolean activitat;
 
