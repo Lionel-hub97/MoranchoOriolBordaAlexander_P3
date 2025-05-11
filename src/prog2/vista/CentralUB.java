@@ -62,63 +62,70 @@ public class CentralUB {
         Scanner sc = new Scanner(System.in);
         OpcionsMenuPrincipal opcio;
 
-        do {
-            menuPrincipal.mostrarMenu();
-            opcio = menuPrincipal.getOpcio(sc);
+            do {
+                menuPrincipal.mostrarMenu();
+                try {
 
-            switch (opcio) {
-                case GESTIO_BARRES_DE_CONTROL:
-                    gestioBarresDeControl(sc);
-                    break;
-                case GESTIO_REACTOR:
-                    gestioReactor(sc);
-                    break;
-                case GESTIO_SISTEMA_REFRIGERACIO:
-                    gestioSistemaRefrigeracio(sc);
-                    break;
-                case MOSTRAR_ESTAT_CENTRAL:
-                    System.out.println(adaptador.mostraEstat());
-                    break;
-                case MOSTRAR_BITACOLA:
-                    System.out.println(adaptador.mostraBitacola());
-                    break;
-                case MOSTRAR_INCIDENCIES:
-                    System.out.println(adaptador.mostraIncidencies());
-                    break;
-                case OBTENIR_DEMANDA_SATISFETA_AMB_CONFIGURACIO_ACTUAL:
-                    System.out.println("Demanda de Potencia: " + demandaPotencia);
-                    System.out.println("Potencia satisfeta: " + adaptador.calculaPotencia());
-                    System.out.println("Percentatge de la demanda satisfeta: " + ((adaptador.calculaPotencia()/demandaPotencia)*100) + "%");
-                    break;
-                case FINALITZAR_DIA:
-                    finalitzaDia();
-                    break;
-                case GUARDAR_DADES:
-                    System.out.println("Indica el nom de fitxer: ");
-                    try {
-                        adaptador.guardaDades(sc.nextLine());
-                    }
-                    catch (CentralUBException e) {
-                        System.err.println(e.getMessage());
-                    }
-                    break;
-                case CARREGA_DADES:
-                    System.out.println("Indica el nom de fitxer: ");
+                    opcio = menuPrincipal.getOpcio(sc);
 
-                    try {
-                        adaptador.carregaDades(sc.nextLine());
-                    } catch (CentralUBException e) {
-                        System.err.println(e.getMessage());
-                    }
-                    break;
-                case SORTIR:
-                    System.out.println("Sortint del sistema...");
-                    break;
-                default:
-                    System.out.println("Opció no implementada encara.");
-            }
+                    switch (opcio) {
+                        case GESTIO_BARRES_DE_CONTROL:
+                            gestioBarresDeControl(sc);
+                            break;
+                        case GESTIO_REACTOR:
+                            gestioReactor(sc);
+                            break;
+                        case GESTIO_SISTEMA_REFRIGERACIO:
+                            gestioSistemaRefrigeracio(sc);
+                            break;
+                        case MOSTRAR_ESTAT_CENTRAL:
+                            System.out.println(adaptador.mostraEstat());
+                            break;
+                        case MOSTRAR_BITACOLA:
+                            System.out.println(adaptador.mostraBitacola());
+                            break;
+                        case MOSTRAR_INCIDENCIES:
+                            System.out.println(adaptador.mostraIncidencies());
+                            break;
+                        case OBTENIR_DEMANDA_SATISFETA_AMB_CONFIGURACIO_ACTUAL:
+                            System.out.println("Demanda de Potencia: " + demandaPotencia);
+                            System.out.println("Potencia satisfeta: " + adaptador.calculaPotencia());
+                            System.out.println("Percentatge de la demanda satisfeta: " + ((adaptador.calculaPotencia() / demandaPotencia) * 100) + "%");
+                            break;
+                        case FINALITZAR_DIA:
+                            finalitzaDia();
+                            break;
+                        case GUARDAR_DADES:
+                            System.out.println("Indica el nom de fitxer: ");
+                            try {
+                                adaptador.guardaDades(sc.nextLine());
+                            } catch (CentralUBException e) {
+                                System.err.println(e.getMessage());
+                            }
+                            break;
+                        case CARREGA_DADES:
+                            System.out.println("Indica el nom de fitxer: ");
 
-        } while (opcio != OpcionsMenuPrincipal.SORTIR);
+                            try {
+                                adaptador.carregaDades(sc.nextLine());
+                            } catch (CentralUBException e) {
+                                System.err.println(e.getMessage());
+                            }
+                            break;
+                        case SORTIR:
+                            System.out.println("Sortint del sistema...");
+                            break;
+                        default:
+                            System.out.println("Opció no implementada encara.");
+                    }
+                }catch (Exception e) {
+                    System.out.println("Si us plau, introdueix un número vàlid.");
+                    sc.nextLine(); // neteja el buffer per evitar bucle infinit
+                    opcio = null;  // per evitar que sigui SORTIR per accident
+                }
+
+            } while (opcio != OpcionsMenuPrincipal.SORTIR);
+
 
 
     }
@@ -137,26 +144,32 @@ public class CentralUB {
         OpcionsBarresDeControl opcio;
         do {
             menu.mostrarMenu();
-            opcio = menu.getOpcio(sc);
+            try {
+                opcio = menu.getOpcio(sc);
 
-            switch (opcio) {
-                case OBTENIR_INSERCIO_BARRES:
-                    System.out.println("Insercio actual: " + adaptador.getInsercioBarres());
-                    break;
-                case ESTABLIR_INSERCIO_BARRES:
-                    System.out.print("Nova insercio (0-100): ");
-                    float in = sc.nextFloat();
-                    sc.nextLine();
-                    try {
-                    adaptador.setInsercioBarres(in);
-                    } catch (CentralUBException e){
-                        System.out.println("Error: " + e.getMessage());
-                    }
-                    System.out.println("Insercio establerta a: " + in);
-                    break;
-                case SORTIR:
-                    System.out.println("Tornant al menú principal...");
-                    break;
+                switch (opcio) {
+                    case OBTENIR_INSERCIO_BARRES:
+                        System.out.println("Insercio actual: " + adaptador.getInsercioBarres());
+                        break;
+                    case ESTABLIR_INSERCIO_BARRES:
+                        System.out.print("Nova insercio (0-100): ");
+                        float in = sc.nextFloat();
+                        sc.nextLine();
+                        try {
+                            adaptador.setInsercioBarres(in);
+                        } catch (CentralUBException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        System.out.println("Insercio establerta a: " + in);
+                        break;
+                    case SORTIR:
+                        System.out.println("Tornant al menú principal...");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Si us plau, introdueix un número vàlid.");
+                sc.nextLine(); // neteja el buffer per evitar bucle infinit
+                opcio = null;  // per evitar que sigui SORTIR per accident
             }
         } while (opcio != OpcionsBarresDeControl.SORTIR);
     }
@@ -176,30 +189,36 @@ public class CentralUB {
         OpcionsReactor opcio;
         do {
             menuReactor.mostrarMenu();
-            opcio = menuReactor.getOpcio(sc);
+            try {
+                opcio = menuReactor.getOpcio(sc);
 
-            switch (opcio) {
-                case ACTIVAR_REACTOR:
-                    // Crida a l'adaptador per activar el reactor
-                    try {
-                        adaptador.activaReactor();
-                    } catch (CentralUBException e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
-                    System.out.println("Reactor activat.");
-                    break;
-                case DESACTIVAR_REACTOR:
-                    // Crida a l'adaptador per desactivar
-                    adaptador.desactivaReactor();
-                    System.out.println("Reactor desactivat.");
-                    break;
-                case MOSTRAR_ESTAT:
-                    // Mostrar estat del reactor
-                    System.out.println("Estat Reactor: \n" + adaptador.mostraReactor());
-                    break;
-                case SORTIR:
-                    System.out.println("Tornant al menú principal...");
-                    break;
+                switch (opcio) {
+                    case ACTIVAR_REACTOR:
+                        // Crida a l'adaptador per activar el reactor
+                        try {
+                            adaptador.activaReactor();
+                        } catch (CentralUBException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        System.out.println("Reactor activat.");
+                        break;
+                    case DESACTIVAR_REACTOR:
+                        // Crida a l'adaptador per desactivar
+                        adaptador.desactivaReactor();
+                        System.out.println("Reactor desactivat.");
+                        break;
+                    case MOSTRAR_ESTAT:
+                        // Mostrar estat del reactor
+                        System.out.println("Estat Reactor: \n" + adaptador.mostraReactor());
+                        break;
+                    case SORTIR:
+                        System.out.println("Tornant al menú principal...");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Si us plau, introdueix un número vàlid.");
+                sc.nextLine(); // neteja el buffer per evitar bucle infinit
+                opcio = null;  // per evitar que sigui SORTIR per accident
             }
         } while (opcio != OpcionsReactor.SORTIR);
     }
@@ -221,50 +240,56 @@ public class CentralUB {
         OpcionsSistemaRefrigeracio opcio;
         do {
             menu.mostrarMenu();
-            opcio = menu.getOpcio(sc);
+            try {
+                opcio = menu.getOpcio(sc);
 
-            switch (opcio) {
-                case ACTIVAR_TOTES_LES_BOMBES:
-                    try {
-                        adaptador.activarBombes();
-                        System.out.println("Totes les bombes activades.");
-                    } catch (CentralUBException e) {
-                        System.err.println("Error: " + e.getMessage());
-                    }
+                switch (opcio) {
+                    case ACTIVAR_TOTES_LES_BOMBES:
+                        try {
+                            adaptador.activarBombes();
+                            System.out.println("Totes les bombes activades.");
+                        } catch (CentralUBException e) {
+                            System.err.println("Error: " + e.getMessage());
+                        }
 
-                    break;
-                case DESACTIVAR_TOTES_LES_BOMBES:
-                    try {
-                        adaptador.desactivarBombes();
-                        System.out.println("Totes les bombes desactivades.");
-                    } catch (CentralUBException e) {
-                        System.err.println("Error: " + e.getMessage());
-                    }
-                    break;
-                case ACTIVAR_BOMBA:
-                    try {
+                        break;
+                    case DESACTIVAR_TOTES_LES_BOMBES:
+                        try {
+                            adaptador.desactivarBombes();
+                            System.out.println("Totes les bombes desactivades.");
+                        } catch (CentralUBException e) {
+                            System.err.println("Error: " + e.getMessage());
+                        }
+                        break;
+                    case ACTIVAR_BOMBA:
+                        try {
+                            System.out.print("Introdueix l'ID de la bomba (0-3): ");
+                            int idActiva = sc.nextInt();
+                            sc.nextLine();
+                            adaptador.activaBomba(idActiva);
+                            System.out.println("Bomba " + idActiva + " activada.");
+                        } catch (CentralUBException e) {
+                            System.err.println("Error: " + e.getMessage());
+                        }
+                        break;
+                    case DESACTIVAR_BOMBA:
                         System.out.print("Introdueix l'ID de la bomba (0-3): ");
-                        int idActiva = sc.nextInt();
-                        sc.nextLine();
-                        adaptador.activaBomba(idActiva);
-                        System.out.println("Bomba " + idActiva + " activada.");
-                    } catch (CentralUBException e) {
-                        System.err.println("Error: " + e.getMessage());
-                    }
-                    break;
-                case DESACTIVAR_BOMBA:
-                    System.out.print("Introdueix l'ID de la bomba (0-3): ");
-                    int idDesactiva = sc.nextInt();
+                        int idDesactiva = sc.nextInt();
 
-                    adaptador.desactivaBomba(idDesactiva);
-                    System.out.println("Bomba " + idDesactiva + " desactivada.");
-                    break;
-                case MOSTRAR_ESTAT:
-                    System.out.println("Estat actual de les bombes: " + adaptador.mostraSistemaRefrigeracio());
-                    break;
-                case SORTIR:
-                    System.out.println("Tornant al menú principal...");
-                    break;
+                        adaptador.desactivaBomba(idDesactiva);
+                        System.out.println("Bomba " + idDesactiva + " desactivada.");
+                        break;
+                    case MOSTRAR_ESTAT:
+                        System.out.println("Estat actual de les bombes: " + adaptador.mostraSistemaRefrigeracio());
+                        break;
+                    case SORTIR:
+                        System.out.println("Tornant al menú principal...");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Si us plau, introdueix un número vàlid.");
+                sc.nextLine(); // neteja el buffer per evitar bucle infinit
+                opcio = null;  // per evitar que sigui SORTIR per accident
             }
         } while (opcio != OpcionsSistemaRefrigeracio.SORTIR);
     }
