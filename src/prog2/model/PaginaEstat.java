@@ -59,6 +59,6 @@ public class PaginaEstat extends PaginaBitacola implements Serializable {
                 "- Output Reactor: "+ getGrausReactor() +" Graus\n" +
                 "- Output Sistema de Refrigeració: "+ getGrausSistemaRefrigeracio() +" Graus\n" +
                 "- Output Generador de Vapor: "+ getGrausGeneradorVapor() +" Graus\n" +
-                "- Output Turbina: "+ getGrausTurbina() +" Unitats de Potència";
+                "- Output Turbina: "+ getGrausTurbina() +" Unitats de Potència\n";
     }
 }

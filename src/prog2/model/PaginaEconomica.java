@@ -71,7 +71,7 @@ public class PaginaEconomica extends PaginaBitacola implements Serializable {
     public String toString(){
         return "# Pàgina Econòmica\n" +
                 "- Dia: "+ getDia() +"\n" +
-                "- Demanda de Potència:"+ getDemandaPotencia() +"\n" +
+                "- Demanda de Potència: "+ getDemandaPotencia() +"\n" +
                 "- Potència Generada: "+ getPotenciaGenerada() +"\n" +
                 "- Demanda de Potència Satisfeta: "+ getPercentatgePotenciaSatisfeta() +" %\n" +
                 "- Beneficis: "+ getBeneficis() +" Unitats Econòmiques\n" +

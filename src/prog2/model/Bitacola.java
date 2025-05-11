@@ -8,9 +8,11 @@ import java.util.List;
 
 public class Bitacola implements InBitacola, Serializable {
     private ArrayList<PaginaBitacola> paginesBitacoles;
+
     public Bitacola() {
         paginesBitacoles = new ArrayList<>();
     }
+
     @Override
     public void afegeixPagina(PaginaBitacola p) {
 

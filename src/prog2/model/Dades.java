@@ -105,7 +105,8 @@ public class Dades implements InDades, Serializable {
         if(calculaPotencia()>demandaPotencia){
             penalitzacio = PENALITZACIO_EXCES_POTENCIA;
         }
-        float costOperatiu = 0;
+        //Barres de control, com no hi ha classe els afegim manualment
+        float costOperatiu = 5;
         if(reactor.getActivat()){
             costOperatiu += reactor.getCostOperatiu();
         }
@@ -121,7 +122,7 @@ public class Dades implements InDades, Serializable {
         float guanysNous = beneficis - costOperatiu - penalitzacio;
         guanysAcumulats += guanysNous;
 
-        return new PaginaEconomica(dia, demandaPotencia, calculaPotencia(), percent, beneficis,penalitzacio, costOperatiu, guanysAcumulats);
+        return new PaginaEconomica(dia, demandaPotencia, calculaPotencia(), percent, beneficis, penalitzacio, costOperatiu, guanysAcumulats);
     }
 
     /**
@@ -195,6 +196,9 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public void setInsercioBarres(float insercioBarres) throws CentralUBException {
+        if (insercioBarres < 0 || insercioBarres > 100) {
+            throw new CentralUBException("Insercio ha de ser entre (0 - 100)");
+        }
         this.insercioBarres = insercioBarres;
 
     }
@@ -250,11 +254,7 @@ public class Dades implements InDades, Serializable {
 
     @Override
     public float calculaPotencia() {
-        return turbina.calculaOutput
-                (generadorVapor.calculaOutput
-                        (sistemaRefrigeracio.calculaOutput
-                                (reactor.calculaOutput
-                                        (insercioBarres))));
+        return turbina.calculaOutput(generadorVapor.calculaOutput(sistemaRefrigeracio.calculaOutput(reactor.calculaOutput(insercioBarres))));
     }
 
     @Override
