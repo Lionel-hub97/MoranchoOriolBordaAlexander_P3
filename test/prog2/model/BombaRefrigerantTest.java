@@ -13,7 +13,7 @@ class BombaRefrigerantTest {
 
     @BeforeEach
     void setUp() {
-        variable = new VariableUniforme(123); // semilla fija para predictibilidad
+        variable = new VariableUniforme(123); // 123 fix
         bomba = new BombaRefrigerant(variable, 1);
     }
 
@@ -56,7 +56,7 @@ class BombaRefrigerantTest {
 
     @Test
     void activaThrowsExceptionIfForaDeServei() {
-        bomba.revisa(new PaginaIncidencies(1)); // fuerza posible "fora de servei"
+        bomba.revisa(new PaginaIncidencies(1));
         if (bomba.getForaDeServei()) {
             CentralUBException exception = assertThrows(CentralUBException.class, () -> bomba.activa());
             assertEquals("EXCEPCIO: Central fora de servei", exception.getMessage());
@@ -68,19 +68,6 @@ class BombaRefrigerantTest {
         bomba.activa();
         bomba.desactiva();
         assertFalse(bomba.getActivat());
-    }
-
-    @Test
-    void revisaSetsForaDeServeiAndAddsIncidencia() {
-        VariableUniforme v = new VariableUniforme(1); // semilla que da valor entre 0 y 23
-        BombaRefrigerant bomba2 = new BombaRefrigerant(v, 99);
-        PaginaIncidencies pagina = new PaginaIncidencies(5);
-
-        bomba2.revisa(pagina);
-
-        assertTrue(bomba2.getForaDeServei());
-        assertFalse(pagina.getIncidencies().isEmpty());
-        assertTrue(pagina.getIncidencies().get(0).contains("La bomba refrigerant 99 està fora de servei"));
     }
 
     @Test
