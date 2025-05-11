@@ -103,6 +103,13 @@ public class CentralUB {
                     }
                     break;
                 case CARREGA_DADES:
+                    System.out.println("Indica el nom de fitxer: ");
+
+                    try {
+                        adaptador.carregaDades(sc.nextLine());
+                    } catch (CentralUBException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case SORTIR:
                     System.out.println("Sortint del sistema...");
