@@ -65,4 +65,8 @@ public class Reactor implements InComponent{
         }
         return temperatura;
     }
+    @Override
+    public String toString() {
+        return "Reactor: Activat: " + (getActivat() ? "Si" : "No") + ", Temperatura: " + getTemperatura() + " ºC]";
+    }
 }

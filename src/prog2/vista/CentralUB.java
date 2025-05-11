@@ -188,7 +188,7 @@ public class CentralUB {
                     break;
                 case MOSTRAR_ESTAT:
                     // Mostrar estat del reactor
-                    String reactor = "Estat Reactor: \n" + adaptador.mostraReactor();
+                    System.out.println("Estat Reactor: \n" + adaptador.mostraReactor());
                     break;
                 case SORTIR:
                     System.out.println("Tornant al menú principal...");
@@ -218,24 +218,42 @@ public class CentralUB {
 
             switch (opcio) {
                 case ACTIVAR_TOTES_LES_BOMBES:
-                    System.out.println("Totes les bombes activades.");
+                    try {
+                        adaptador.activarBombes();
+                        System.out.println("Totes les bombes activades.");
+                    } catch (CentralUBException e) {
+                        System.err.println("Error: " + e.getMessage());
+                    }
 
                     break;
                 case DESACTIVAR_TOTES_LES_BOMBES:
-                    System.out.println("Totes les bombes desactivades.");
+                    try {
+                        adaptador.desactivarBombes();
+                        System.out.println("Totes les bombes desactivades.");
+                    } catch (CentralUBException e) {
+                        System.err.println("Error: " + e.getMessage());
+                    }
                     break;
                 case ACTIVAR_BOMBA:
-                    System.out.print("Introdueix l'ID de la bomba (0-3): ");
-                    int idActiva = sc.nextInt(); sc.nextLine();
-                    System.out.println("Bomba " + idActiva + " activada.");
+                    try {
+                        System.out.print("Introdueix l'ID de la bomba (0-3): ");
+                        int idActiva = sc.nextInt();
+                        sc.nextLine();
+                        adaptador.activaBomba(idActiva);
+                        System.out.println("Bomba " + idActiva + " activada.");
+                    } catch (CentralUBException e) {
+                        System.err.println("Error: " + e.getMessage());
+                    }
                     break;
                 case DESACTIVAR_BOMBA:
                     System.out.print("Introdueix l'ID de la bomba (0-3): ");
-                    int idDesactiva = sc.nextInt(); sc.nextLine();
+                    int idDesactiva = sc.nextInt();
+
+                    adaptador.desactivaBomba(idDesactiva);
                     System.out.println("Bomba " + idDesactiva + " desactivada.");
                     break;
                 case MOSTRAR_ESTAT:
-                    System.out.println("Estat actual de les bombes: [mock]");
+                    System.out.println("Estat actual de les bombes: " + adaptador.mostraSistemaRefrigeracio());
                     break;
                 case SORTIR:
                     System.out.println("Tornant al menú principal...");

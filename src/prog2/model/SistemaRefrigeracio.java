@@ -107,4 +107,20 @@ public class SistemaRefrigeracio implements InComponent{
 
         return Math.min(output, input);
     }
+    @Override
+    public String toString() {
+        String s = "";
+        StringBuilder sb = new StringBuilder();
+        s += "Sistema de Refrigeració:\n";
+        Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
+        while(it.hasNext()){
+            BombaRefrigerant bomba = it.next();
+            s += "Bomba ID: " + bomba.getId() + " | Estat: " + (bomba.getActivat() ? "Activada" : "Desactivada") + "\n";
+        }
+
+
+        return s;
+    }
 }
+
+

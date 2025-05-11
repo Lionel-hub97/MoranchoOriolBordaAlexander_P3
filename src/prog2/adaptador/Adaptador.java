@@ -67,8 +67,13 @@ public class Adaptador {
         return dades.mostraBitacola();
     }
 
-    public List<PaginaIncidencies> mostraIncidencies() {
-        return dades.mostraIncidencies();
+    public String mostraIncidencies() {
+        String s = "Llista Incidencies:" + "\n";
+        Iterator<PaginaIncidencies> it = dades.mostraIncidencies().iterator();
+        while (it.hasNext()) {
+            s += it.next() + "\n";
+        }
+        return s;
     }
 
     public void guardaDades(String camiDesti) throws CentralUBException {
@@ -114,6 +119,24 @@ public class Adaptador {
             fitxer.close();
         } catch (IOException | ClassNotFoundException e) {
             throw new CentralUBException("Error durant la càrrega de dades: " + e.getMessage());
+        }
+    }
+    public void activarBombes() throws CentralUBException {
+        Iterator<BombaRefrigerant>it = dades.mostraSistemaRefrigeracio().getBombesRefrigerants().iterator();
+        while (it.hasNext()) {
+            BombaRefrigerant bomba = it.next();
+            if (!bomba.getActivat()) {
+                bomba.activa();
+            }
+        }
+    }
+    public void desactivarBombes() throws CentralUBException {
+        Iterator<BombaRefrigerant>it = dades.mostraSistemaRefrigeracio().getBombesRefrigerants().iterator();
+        while (it.hasNext()) {
+            BombaRefrigerant bomba = it.next();
+            if (bomba.getActivat()) {
+                bomba.desactiva();
+            }
         }
     }
 
