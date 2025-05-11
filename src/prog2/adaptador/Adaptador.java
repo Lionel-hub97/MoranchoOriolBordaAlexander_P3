@@ -122,22 +122,10 @@ public class Adaptador {
         }
     }
     public void activarBombes() throws CentralUBException {
-        Iterator<BombaRefrigerant>it = dades.mostraSistemaRefrigeracio().getBombesRefrigerants().iterator();
-        while (it.hasNext()) {
-            BombaRefrigerant bomba = it.next();
-            if (!bomba.getActivat()) {
-                bomba.activa();
-            }
-        }
+        mostraSistemaRefrigeracio().activa();
     }
     public void desactivarBombes() throws CentralUBException {
-        Iterator<BombaRefrigerant>it = dades.mostraSistemaRefrigeracio().getBombesRefrigerants().iterator();
-        while (it.hasNext()) {
-            BombaRefrigerant bomba = it.next();
-            if (bomba.getActivat()) {
-                bomba.desactiva();
-            }
-        }
+        mostraSistemaRefrigeracio().desactiva();
     }
 
 }
