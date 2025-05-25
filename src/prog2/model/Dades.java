@@ -106,7 +106,7 @@ public class Dades implements InDades, Serializable {
             penalitzacio = PENALITZACIO_EXCES_POTENCIA;
         }
         //Barres de control, com no hi ha classe els afegim manualment
-        float costOperatiu = 5;
+        float costOperatiu = 0;
         if(reactor.getActivat()){
             costOperatiu += reactor.getCostOperatiu();
         }
@@ -161,11 +161,7 @@ public class Dades implements InDades, Serializable {
 
     public Bitacola finalitzaDia(float demandaPotencia) {
 
-        // Posar bombes en servei (totes fora de servei a false)
-        sistemaRefrigeracio.posarBombesEnServei();
 
-        // Desactivar totes les bombes
-        sistemaRefrigeracio.desactiva();
 
         // Actualitza economia
         PaginaEconomica paginaEconomica = actualitzaEconomia(demandaPotencia);
