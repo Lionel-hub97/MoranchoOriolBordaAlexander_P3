@@ -13,10 +13,11 @@ public class AppCentralUB extends JFrame {
     private JButton btnGestioComponentsCentral;
     private JButton btnVisualitzarInformacio;
     private JButton btnFinalitzarDia;
-    private JButton btnGuardarCarregar;
     private JLabel lblNumDia;
     private JLabel lblDemandaPotencia;
     private JLabel lblGuanyAcumulat;
+    private JButton btnGuardar;
+    private JButton btnCarregar;
     private Adaptador adaptador;
 
     public static void main(String[] args) {
