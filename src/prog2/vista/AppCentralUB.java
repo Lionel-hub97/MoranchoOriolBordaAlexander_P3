@@ -42,5 +42,12 @@ public class AppCentralUB extends JFrame {
 
             }
         });
+        btnVisualitzarInformacio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmVisualitzarInformacio.mostrarDialog(AppCentralUB.this, adaptador);
+            }
+        });
+
     }
 }
