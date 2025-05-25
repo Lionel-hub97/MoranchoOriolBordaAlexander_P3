@@ -38,8 +38,14 @@ public class AppCentralUB extends JFrame {
         btnGestioComponentsCentral.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioComponentsCentral dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
-                dialog.setVisible(true);
+                FrmGestioComponentsCentral dialog = null;
+                try {
+                    dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
+                    dialog.setVisible(true);
+                } catch (CentralUBException ex) {
+                    System.err.println(ex.getMessage());
+                }
+
 
             }
         });
