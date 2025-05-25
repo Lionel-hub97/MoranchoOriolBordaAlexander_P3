@@ -15,6 +15,14 @@ public class Adaptador {
         this.dades = new Dades();
     }
 
+    public int getDia(){
+        return dades.getDia();
+    }
+
+    public float getGuanysAcumulats() {
+        return dades.getGuanysAcumulats();
+    }
+
     public String finalitzaDia(float demandaPotencia) {
         return dades.finalitzaDia(demandaPotencia).toString();
     }

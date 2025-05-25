@@ -282,4 +282,8 @@ public class Dades implements InDades, Serializable {
         return bitacola.getIncidencies();
     }
 
+    public int getDia(){
+        return dia;
+    }
+
 }
