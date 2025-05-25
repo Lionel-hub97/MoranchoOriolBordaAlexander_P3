@@ -26,6 +26,7 @@ public class AppCentralUB extends JFrame {
         });
     }
 
+
     // Constructor on configures la finestra
     public AppCentralUB() {
         adaptador = new Adaptador();
