@@ -39,6 +39,10 @@ public class Adaptador {
         return dades.mostraReactor();
     }
 
+    public boolean getEstatReactor() {
+        return dades.getEstatReactor();
+    }
+
     public void activaBomba(int id) throws CentralUBException {
         dades.activaBomba(id);
     }
@@ -122,6 +126,10 @@ public class Adaptador {
     }
     public void desactivarBombes() throws CentralUBException {
         mostraSistemaRefrigeracio().desactiva();
+    }
+
+    public boolean getEstatBomba(int id) throws CentralUBException {
+        return dades.getEstatBomba(id);
     }
 
 }

@@ -155,6 +155,10 @@ public class Dades implements InDades, Serializable {
 
     }
 
+    public boolean getEstatReactor() {
+        return reactor.getActivat();
+    }
+
     public Bitacola finalitzaDia(float demandaPotencia) {
         // Actualitza economia
         PaginaEconomica paginaEconomica = actualitzaEconomia(demandaPotencia);
@@ -245,6 +249,19 @@ public class Dades implements InDades, Serializable {
                 break;
             }
         }
+    }
+
+    public boolean getEstatBomba(int id) throws CentralUBException {
+        Iterator<BombaRefrigerant> it = sistemaRefrigeracio.getBombesRefrigerants().iterator();
+        while(it.hasNext()){
+            BombaRefrigerant bomba = it.next();
+
+            if(bomba.getId() == id){
+                return bomba.getActivat();
+
+            }
+        }
+        throw new CentralUBException("Bomba inexistent.");
     }
 
     @Override
