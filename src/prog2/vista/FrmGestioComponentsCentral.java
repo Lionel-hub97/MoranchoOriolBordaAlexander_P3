@@ -17,13 +17,13 @@ public class FrmGestioComponentsCentral extends JDialog {
     private JLabel lblPercentarge;
     private JButton btnActivarReactor;
     private JButton btnDesactivarReactor;
-    private JButton btnBomba1;
-    private JButton btnBomba4;
+    private JButton btnBomba0;
     private JButton btnBomba3;
     private JButton btnBomba2;
+    private JButton btnBomba1;
     private Adaptador adaptador;
-    private boolean bomba1, bomba2, bomba3, bomba4;
-    private boolean bomba1Orig, bomba2Orig, bomba3Orig, bomba4Orig;
+    private boolean bomba0, bomba1, bomba2, bomba3;
+    private boolean bomba0Orig, bomba1Orig, bomba2Orig, bomba3Orig;
     private float valor;
 
     private boolean estatReactor;
@@ -42,10 +42,10 @@ public class FrmGestioComponentsCentral extends JDialog {
 
         this.adaptador = adaptador;
 
-        configuraBomba(btnBomba1, 0);
-        configuraBomba(btnBomba2, 1);
-        configuraBomba(btnBomba3, 2);
-        configuraBomba(btnBomba4, 3);
+        configuraBomba(btnBomba0, 0);
+        configuraBomba(btnBomba1, 1);
+        configuraBomba(btnBomba2, 2);
+        configuraBomba(btnBomba3, 3);
 
         if(estatReactor) {
             btnActivarReactor.setSelected(true);
@@ -120,63 +120,59 @@ public class FrmGestioComponentsCentral extends JDialog {
 
                 boolean canviBarres = valor != valorOriginalBarres;
                 boolean canviReactor = estatReactor != reactorOriginal;
-                if(bomba1 && !bomba1Orig){
+
+                if(bomba0 && !bomba0Orig){
                     try {
                         adaptador.activaBomba(0);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
 
-                } else if(bomba1Orig){
+                } else if(bomba0Orig){
                     adaptador.desactivaBomba(0);
                     canviBombes = true;
                 }
 
-                if(bomba2 && !bomba2Orig){
+
+                if(bomba1 && !bomba1Orig){
                     try {
                         adaptador.activaBomba(1);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
-
-
-                } else if(bomba2Orig){
+                } else if(bomba1Orig){
                     adaptador.desactivaBomba(1);
                     canviBombes = true;
                 }
-                if(bomba3 && !bomba3Orig){
+
+
+                if(bomba2 && !bomba2Orig){
                     try {
                         adaptador.activaBomba(2);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
-
-
-                } else if(bomba3Orig){
+                } else if(bomba2Orig){
                     adaptador.desactivaBomba(2);
                     canviBombes = true;
                 }
 
-                if(bomba4 && !bomba4Orig){
+
+                if(bomba3 && !bomba3Orig){
                     try {
                         adaptador.activaBomba(3);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
-
-
-                } else if(bomba4Orig){
+                } else if(bomba3Orig){
                     adaptador.desactivaBomba(3);
                     canviBombes = true;
                 }
+
 
                 if (!canviBarres && !canviReactor && !canviBombes) {
                     JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
@@ -196,7 +192,6 @@ public class FrmGestioComponentsCentral extends JDialog {
                         }
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
 
                 }
@@ -206,7 +201,6 @@ public class FrmGestioComponentsCentral extends JDialog {
                         adaptador.setInsercioBarres(valor);
                     } catch (CentralUBException ex) {
                         mostrarError(ex.getMessage());
-                        return;
                     }
 
 
@@ -235,10 +229,10 @@ public class FrmGestioComponentsCentral extends JDialog {
     private void configuraBomba(JButton btn, int index) throws CentralUBException {
         boolean estat = adaptador.getEstatBomba(index);
         switch (index) {
-            case 0 -> bomba1Orig = bomba1 = estat;
-            case 1 -> bomba2Orig = bomba2 = estat;
-            case 2 -> bomba3Orig = bomba3 = estat;
-            case 3 -> bomba4Orig = bomba4 = estat;
+            case 0 -> bomba0Orig = bomba0 = estat;
+            case 1 -> bomba1Orig = bomba1 = estat;
+            case 2 -> bomba2Orig = bomba2 = estat;
+            case 3 -> bomba3Orig = bomba3 = estat;
         }
 
         actualitzaBotonBomba(btn, estat, index);
@@ -247,20 +241,20 @@ public class FrmGestioComponentsCentral extends JDialog {
             boolean nouEstat;
             switch (index) {
                 case 0 -> {
+                    bomba0 = !bomba0;
+                    nouEstat = bomba0;
+                }
+                case 1 -> {
                     bomba1 = !bomba1;
                     nouEstat = bomba1;
                 }
-                case 1 -> {
+                case 2 -> {
                     bomba2 = !bomba2;
                     nouEstat = bomba2;
                 }
-                case 2 -> {
+                case 3 -> {
                     bomba3 = !bomba3;
                     nouEstat = bomba3;
-                }
-                case 3 -> {
-                    bomba4 = !bomba4;
-                    nouEstat = bomba4;
                 }
                 default -> throw new IllegalStateException("Índex de bomba no vàlid: " + index);
             }

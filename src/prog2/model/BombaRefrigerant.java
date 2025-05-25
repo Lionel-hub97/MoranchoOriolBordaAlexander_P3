@@ -47,6 +47,11 @@ public class BombaRefrigerant implements InBombaRefrigerant, Serializable {
     }
 
     //OTROS METODOS
+
+    public void setForaDeServeiFalse(){
+        foraDeServei = false;
+    }
+
     @Override
     public void activa() throws CentralUBException {
         if (foraDeServei)
@@ -67,6 +72,7 @@ public class BombaRefrigerant implements InBombaRefrigerant, Serializable {
             p.afegeixIncidencia("La bomba refrigerant " + id + " està fora de servei");
         }
     }
+
     public String toString(){
         return "ID="+ id +", " +
                 "Activitat="+ activitat +", " +

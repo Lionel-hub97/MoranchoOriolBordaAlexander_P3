@@ -121,6 +121,15 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
 
         return s;
     }
+
+    public void posarBombesEnServei() {
+        Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
+        while(it.hasNext()) {
+            BombaRefrigerant bomba = it.next();
+            bomba.setForaDeServeiFalse();
+        }
+    }
+
 }
 
 

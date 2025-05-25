@@ -87,7 +87,7 @@
                       <text value="Desactivar Reactor"/>
                     </properties>
                   </component>
-                  <component id="7dc08" class="javax.swing.JButton" binding="btnBomba4">
+                  <component id="7dc08" class="javax.swing.JButton" binding="btnBomba3">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="60"/>
@@ -98,7 +98,7 @@
                       <text value="Bomba 3:"/>
                     </properties>
                   </component>
-                  <component id="7fab9" class="javax.swing.JButton" binding="btnBomba3">
+                  <component id="7fab9" class="javax.swing.JButton" binding="btnBomba2">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="60"/>
@@ -109,7 +109,7 @@
                       <text value="Bomba 2:"/>
                     </properties>
                   </component>
-                  <component id="20695" class="javax.swing.JButton" binding="btnBomba1">
+                  <component id="20695" class="javax.swing.JButton" binding="btnBomba0">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="60"/>
@@ -120,7 +120,7 @@
                       <text value="Bomba 0: Activada"/>
                     </properties>
                   </component>
-                  <component id="dbe56" class="javax.swing.JButton" binding="btnBomba2">
+                  <component id="dbe56" class="javax.swing.JButton" binding="btnBomba1">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="-1" height="60"/>

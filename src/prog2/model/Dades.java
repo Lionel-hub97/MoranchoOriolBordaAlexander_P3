@@ -160,6 +160,13 @@ public class Dades implements InDades, Serializable {
     }
 
     public Bitacola finalitzaDia(float demandaPotencia) {
+
+        // Posar bombes en servei (totes fora de servei a false)
+        sistemaRefrigeracio.posarBombesEnServei();
+
+        // Desactivar totes les bombes
+        sistemaRefrigeracio.desactiva();
+
         // Actualitza economia
         PaginaEconomica paginaEconomica = actualitzaEconomia(demandaPotencia);
 
