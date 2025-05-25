@@ -13,7 +13,6 @@ public class FrmVisualitzarInformacio extends JDialog {
     private JTextArea txtAreaInformacio;
     private JPanel Panel1;
     private JPanel Panel2;
-    private JPanel Panel3;
     private final Adaptador adaptador;
 
     public FrmVisualitzarInformacio(JFrame parent, Adaptador adaptador) {
@@ -53,7 +52,7 @@ public class FrmVisualitzarInformacio extends JDialog {
         }));
 
         // Mostrar información automáticamente al cambiar la opción
-        cmboxOpcionsVisualitzar.addActionListener(e -> btnVisualitzar.doClick());
+        //cmboxOpcionsVisualitzar.addActionListener(e -> btnVisualitzar.doClick());
     }
 
     private void configurarTextArea() {
