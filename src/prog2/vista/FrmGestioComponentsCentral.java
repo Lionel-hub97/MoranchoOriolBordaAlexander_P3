@@ -118,8 +118,10 @@ public class FrmGestioComponentsCentral extends JDialog {
                         adaptador.activaBomba(0);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
-                        throw new RuntimeException(ex);
+                        mostrarError(ex.getMessage());
+                        return;
                     }
+
                 } else if(bomba1Orig){
                     adaptador.desactivaBomba(0);
                     canviBombes = true;
@@ -130,8 +132,10 @@ public class FrmGestioComponentsCentral extends JDialog {
                         adaptador.activaBomba(1);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
-                        throw new RuntimeException(ex);
+                        mostrarError(ex.getMessage());
+                        return;
                     }
+
 
                 } else if(bomba2Orig){
                     adaptador.desactivaBomba(1);
@@ -142,8 +146,10 @@ public class FrmGestioComponentsCentral extends JDialog {
                         adaptador.activaBomba(2);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
-                        throw new RuntimeException(ex);
+                        mostrarError(ex.getMessage());
+                        return;
                     }
+
 
                 } else if(bomba3Orig){
                     adaptador.desactivaBomba(2);
@@ -155,8 +161,10 @@ public class FrmGestioComponentsCentral extends JDialog {
                         adaptador.activaBomba(3);
                         canviBombes = true;
                     } catch (CentralUBException ex) {
-                        throw new RuntimeException(ex);
+                        mostrarError(ex.getMessage());
+                        return;
                     }
+
 
                 } else if(bomba4Orig){
                     adaptador.desactivaBomba(3);
@@ -180,23 +188,20 @@ public class FrmGestioComponentsCentral extends JDialog {
                             adaptador.desactivaReactor();
                         }
                     } catch (CentralUBException ex) {
-                        JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                                ex.getMessage(),
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
+                        mostrarError(ex.getMessage());
                         return;
                     }
+
                 }
 
                 if (canviBarres) {
                     try {
                         adaptador.setInsercioBarres(valorBarres);
                     } catch (CentralUBException ex) {
-                        JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                                ex.getMessage(),
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
+                        mostrarError(ex.getMessage());
+                        return;
                     }
+
 
                 }
 
@@ -260,6 +265,16 @@ public class FrmGestioComponentsCentral extends JDialog {
         btn.setBackground(estat ? Color.GREEN : Color.RED);
         btn.setText("Bomba " + (index + 1) + ": " + (estat ? "Activada" : "Desactivada"));
     }
+
+    private void mostrarError(String missatge) {
+        JOptionPane.showMessageDialog(
+                this,
+                missatge,
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

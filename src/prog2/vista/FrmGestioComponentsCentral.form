@@ -95,7 +95,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="Bomba 4:"/>
+                      <text value="Bomba 3:"/>
                     </properties>
                   </component>
                   <component id="7fab9" class="javax.swing.JButton" binding="btnBomba3">
@@ -106,7 +106,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="Bomba 3:"/>
+                      <text value="Bomba 2:"/>
                     </properties>
                   </component>
                   <component id="20695" class="javax.swing.JButton" binding="btnBomba1">
@@ -117,7 +117,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="Bomba 1: Activada"/>
+                      <text value="Bomba 0: Activada"/>
                     </properties>
                   </component>
                   <component id="dbe56" class="javax.swing.JButton" binding="btnBomba2">
@@ -128,7 +128,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="Bomba 2:"/>
+                      <text value="Bomba 1:"/>
                     </properties>
                   </component>
                   <component id="f3136" class="javax.swing.JButton" binding="btnCancelarModificacions">
