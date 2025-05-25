@@ -30,7 +30,6 @@ public class FrmVisualitzarInformacio extends JDialog {
 
         getRootPane().setDefaultButton(buttonOK);
 
-        // Configuración de cierre (versión IntelliJ)
         buttonOK.addActionListener(e -> onOK());
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
