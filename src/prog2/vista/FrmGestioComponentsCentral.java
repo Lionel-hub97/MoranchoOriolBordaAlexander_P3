@@ -24,6 +24,7 @@ public class FrmGestioComponentsCentral extends JDialog {
     private Adaptador adaptador;
     private boolean bomba1, bomba2, bomba3, bomba4;
     private boolean bomba1Orig, bomba2Orig, bomba3Orig, bomba4Orig;
+    private float valor;
 
     private boolean estatReactor;
 
@@ -37,7 +38,7 @@ public class FrmGestioComponentsCentral extends JDialog {
         estatReactor = adaptador.getEstatReactor();
 
         sldBarresControl.setValue((int)adaptador.getInsercioBarres());
-        lblPercentarge.setText(sldBarresControl.getValue() + "%");
+        lblPercentarge.setText(adaptador.getInsercioBarres() + "%");
 
         this.adaptador = adaptador;
 
@@ -56,29 +57,35 @@ public class FrmGestioComponentsCentral extends JDialog {
 
         sldBarresControl.addChangeListener(e -> {
             lblPercentarge.setText(sldBarresControl.getValue() + "%");
+            valor = sldBarresControl.getValue();
         });
 
         btnIntroduirInsercioBarresControl.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int valor = Integer.parseInt(txtIntroduirInsercioBarresControl.getText());
-                    if (valor >= 0 && valor <= 100) {
-                        sldBarresControl.setValue(valor);
+                    valor = Float.parseFloat(txtIntroduirInsercioBarresControl.getText().replace(',', '.'));
+                    if (valor >= 0.0f && valor <= 100.0f) {
+                        float valor2 = valor;
+
+                        sldBarresControl.setValue((int)valor);
+                        lblPercentarge.setText(valor2 + "%");
+                        valor = valor2;
                     } else {
                         JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                                "El valor ha d'estar entre 0 i 100",
+                                "El valor ha d'estar entre 0.0 i 100.0",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                            "Has d'introduir un número enter vàlid",
+                            "Has d'introduir un número decimal vàlid.",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
 
         btnActivarReactor.addActionListener(new ActionListener() {
             @Override
@@ -106,12 +113,12 @@ public class FrmGestioComponentsCentral extends JDialog {
         btnAplicarModificacions.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float valorBarres = sldBarresControl.getValue();
+
                 float valorOriginalBarres = adaptador.getInsercioBarres();
                 boolean reactorOriginal = adaptador.getEstatReactor();
                 boolean canviBombes = false;
 
-                boolean canviBarres = valorBarres != valorOriginalBarres;
+                boolean canviBarres = valor != valorOriginalBarres;
                 boolean canviReactor = estatReactor != reactorOriginal;
                 if(bomba1 && !bomba1Orig){
                     try {
@@ -190,7 +197,7 @@ public class FrmGestioComponentsCentral extends JDialog {
 
                 if (canviBarres) {
                     try {
-                        adaptador.setInsercioBarres(valorBarres);
+                        adaptador.setInsercioBarres(valor);
                     } catch (CentralUBException ex) {
                         JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
                                 ex.getMessage(),
@@ -201,7 +208,7 @@ public class FrmGestioComponentsCentral extends JDialog {
                 }
 
                 String missatge = "Modificacions aplicades: " + "\nEstat bombes actualitzat";
-                if (canviBarres) missatge += "\nPercentatge de barres: " + valorBarres + "%";
+                if (canviBarres) missatge += "\nPercentatge de barres: " + valor + "%";
                 if (canviReactor) missatge += "\nReactor " + (estatReactor ? "Activat" : "Desactivat");
 
                 JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
