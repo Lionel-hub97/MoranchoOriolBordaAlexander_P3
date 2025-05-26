@@ -30,13 +30,17 @@ public class FrmGestioComponentsCentral extends JDialog {
 
     private boolean estatReactor;
 
-    public FrmGestioComponentsCentral(JFrame parent, Adaptador adaptador) throws CentralUBException {
+    public FrmGestioComponentsCentral(JFrame parent, Adaptador adaptador, boolean modeEstetic) throws CentralUBException {
         super(parent, "Gestio Central");
+
         setContentPane(contentPane);
 
         setSize(600, 350);
         setLocationRelativeTo(parent);
         setModal(true);
+        if (modeEstetic) {
+            aplicaEstilEstetic();
+        }
         estatReactor = adaptador.getEstatReactor();
 
         valor = adaptador.getInsercioBarres();
@@ -346,5 +350,29 @@ public class FrmGestioComponentsCentral extends JDialog {
 
     private void createUIComponents() {
         // Per si s'han de definir components personalitzats
+    }private void aplicaEstilEstetic() {
+        Color fons = new Color(245, 250, 255);
+        Color boto = new Color(100, 140, 220);
+        Color text = Color.WHITE;
+
+        contentPane.setBackground(fons);
+
+        JButton[] botons = {
+                btnAplicarModificacions,
+                btnCancelarModificacions,
+                btnIntroduirInsercioBarresControl,
+                btnActivarReactor,
+                btnDesactivarReactor,
+
+                btnElementsForaServei
+        };
+
+        for (JButton b : botons) {
+            b.setBackground(boto);
+            b.setForeground(text);
+            b.setFocusPainted(false);
+            b.setBorderPainted(false);
+        }
     }
+
 }

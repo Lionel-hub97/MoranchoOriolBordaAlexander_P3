@@ -43,7 +43,7 @@ public class AppCentralUB extends JFrame {
 
         btnGestioComponentsCentral.addActionListener(e -> {
             try {
-                FrmGestioComponentsCentral dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
+                FrmGestioComponentsCentral dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador, chkModeEstetic.isSelected());
                 dialog.setVisible(true);
             } catch (CentralUBException ex) {
                 JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
