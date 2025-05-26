@@ -70,7 +70,7 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(!bomba.getForaDeServei() && bomba.getActivat()){
+            if(!bomba.getForaDeServei()){
                 bomba.revisa(p);
             }
         }

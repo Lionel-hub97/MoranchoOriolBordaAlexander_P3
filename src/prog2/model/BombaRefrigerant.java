@@ -55,7 +55,7 @@ public class BombaRefrigerant implements InBombaRefrigerant, Serializable {
     @Override
     public void activa() throws CentralUBException {
         if (foraDeServei)
-            throw new CentralUBException("EXCEPCIO: Bomba " + id+1 + " fora de servei, no es pot activar");
+            throw new CentralUBException("EXCEPCIO: Bomba " + (id+1) + " fora de servei, no es pot activar");
         this.activitat = true;
     }
 
@@ -70,7 +70,7 @@ public class BombaRefrigerant implements InBombaRefrigerant, Serializable {
         if (0 <= x && x < 24){
             this.foraDeServei = true;
             this.activitat = false;
-            p.afegeixIncidencia("La bomba refrigerant " + id +1 + " està fora de servei");
+            p.afegeixIncidencia("La bomba refrigerant " + (id +1) + " està fora de servei");
         }
     }
 
