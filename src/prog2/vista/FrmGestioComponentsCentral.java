@@ -124,62 +124,127 @@ public class FrmGestioComponentsCentral extends JDialog {
         btnAplicarModificacions.addActionListener(e -> {
             float valorOriginalBarres = adaptador.getInsercioBarres();
             boolean reactorOriginal = adaptador.getEstatReactor();
+
             boolean canviBombes = false;
+            boolean canviBarres = false;
+            boolean canviReactor = false;
+            boolean hiHaError = false;
 
-            boolean canviBarres = valor != valorOriginalBarres;
-            boolean canviReactor = estatReactor != reactorOriginal;
+            // BOMBA 0
+            if (bomba0 != bomba0Orig) {
+                try {
+                    if (bomba0) {
+                        adaptador.activaBomba(0);
+                    } else {
+                        adaptador.desactivaBomba(0);
+                    }
+                    canviBombes = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Bomba 1: " + ex.getMessage());
+                    bomba0 = false;
+                    actualitzaBotonBomba(btnBomba0, false, 0);
+                    hiHaError = true;
+                }
+            }
 
-            try {
-                if (bomba0 != bomba0Orig) {
-                    if (bomba0) adaptador.activaBomba(0);
-                    else adaptador.desactivaBomba(0);
+            // BOMBA 1
+            if (bomba1 != bomba1Orig) {
+                try {
+                    if (bomba1) {
+                        adaptador.activaBomba(1);
+                    } else {
+                        adaptador.desactivaBomba(1);
+                    }
                     canviBombes = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Bomba 2: " + ex.getMessage());
+                    bomba1 = false;
+                    actualitzaBotonBomba(btnBomba1, false, 1);
+                    hiHaError = true;
                 }
-                if (bomba1 != bomba1Orig) {
-                    if (bomba1) adaptador.activaBomba(1);
-                    else adaptador.desactivaBomba(1);
-                    canviBombes = true;
-                }
-                if (bomba2 != bomba2Orig) {
-                    if (bomba2) adaptador.activaBomba(2);
-                    else adaptador.desactivaBomba(2);
-                    canviBombes = true;
-                }
-                if (bomba3 != bomba3Orig) {
-                    if (bomba3) adaptador.activaBomba(3);
-                    else adaptador.desactivaBomba(3);
-                    canviBombes = true;
-                }
+            }
 
-                if (canviReactor) {
-                    if (estatReactor) adaptador.activaReactor();
-                    else adaptador.desactivaReactor();
+            // BOMBA 2
+            if (bomba2 != bomba2Orig) {
+                try {
+                    if (bomba2) {
+                        adaptador.activaBomba(2);
+                    } else {
+                        adaptador.desactivaBomba(2);
+                    }
+                    canviBombes = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Bomba 3: " + ex.getMessage());
+                    bomba2 = false;
+                    actualitzaBotonBomba(btnBomba2, false, 2);
+                    hiHaError = true;
                 }
+            }
 
-                if (canviBarres) {
+            // BOMBA 3
+            if (bomba3 != bomba3Orig) {
+                try {
+                    if (bomba3) {
+                        adaptador.activaBomba(3);
+                    } else {
+                        adaptador.desactivaBomba(3);
+                    }
+                    canviBombes = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Bomba 4: " + ex.getMessage());
+                    bomba3 = false;
+                    actualitzaBotonBomba(btnBomba3, false, 3);
+                    hiHaError = true;
+                }
+            }
+
+            // REACTOR
+            if (estatReactor != reactorOriginal) {
+                try {
+                    if (estatReactor) {
+                        adaptador.activaReactor();
+                    } else {
+                        adaptador.desactivaReactor();
+                    }
+                    canviReactor = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Reactor: " + ex.getMessage());
+                    hiHaError = true;
+                }
+            }
+
+            // BARRES DE CONTROL
+            if (valor != valorOriginalBarres) {
+                try {
                     adaptador.setInsercioBarres(valor);
+                    canviBarres = true;
+                } catch (CentralUBException ex) {
+                    mostrarError("Barres de control: " + ex.getMessage());
+                    hiHaError = true;
                 }
+            }
 
-                if (!canviBarres && !canviReactor && !canviBombes) {
+            // Missatge de NO CANVIS
+            if (!canviBarres && !canviReactor && !canviBombes) {
+                if (!hiHaError) {
                     JOptionPane.showMessageDialog(this,
                             "No s'han produït canvis.",
                             "Sense canvis",
                             JOptionPane.INFORMATION_MESSAGE);
-                    return;
                 }
-
-                String missatge = "Modificacions aplicades:";
-                if (canviBombes) missatge += "\nEstat bombes actualitzat";
-                if (canviBarres) missatge += "\nPercentatge de barres: " + valor + "%";
-                if (canviReactor) missatge += "\nReactor " + (estatReactor ? "Activat" : "Desactivat");
-
-                JOptionPane.showMessageDialog(this, missatge, "Canvis aplicats", JOptionPane.INFORMATION_MESSAGE);
-                // No fem dispose(); es manté la finestra oberta
-
-            } catch (CentralUBException ex) {
-                mostrarError(ex.getMessage());
+                return;
             }
+
+            // Missatge de CANVIS APLICATS
+            String missatge = "Modificacions aplicades:";
+            if (canviBombes) missatge += "\n- Estat bombes actualitzat";
+            if (canviBarres) missatge += "\n- Percentatge de barres: " + valor + "%";
+            if (canviReactor) missatge += "\n- Reactor " + (estatReactor ? "Activat" : "Desactivat");
+
+            JOptionPane.showMessageDialog(this, missatge, "Canvis aplicats", JOptionPane.INFORMATION_MESSAGE);
         });
+
+
 
         btnCancelarModificacions.addActionListener(e -> dispose());
         btnElementsForaServei.addActionListener(new ActionListener() {
