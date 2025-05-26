@@ -37,10 +37,6 @@ public class FrmVisualitzarInformacio extends JDialog {
                 onOK();
             }
         });
-        contentPane.registerKeyboardAction(e -> onOK(),
-                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
-        );
     }
 
     private void configurarComboBox() {
