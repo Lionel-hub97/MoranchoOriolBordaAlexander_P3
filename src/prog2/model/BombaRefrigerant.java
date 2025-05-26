@@ -69,7 +69,8 @@ public class BombaRefrigerant implements InBombaRefrigerant, Serializable {
         int x = variableUniforme.seguentValor();
         if (0 <= x && x < 24){
             this.foraDeServei = true;
-            p.afegeixIncidencia("La bomba refrigerant " + id + " està fora de servei");
+            this.activitat = false;
+            p.afegeixIncidencia("La bomba refrigerant " + id +1 + " està fora de servei");
         }
     }
 

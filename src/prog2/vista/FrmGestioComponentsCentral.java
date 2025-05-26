@@ -37,7 +37,8 @@ public class FrmGestioComponentsCentral extends JDialog {
         setModal(true);
         estatReactor = adaptador.getEstatReactor();
 
-        sldBarresControl.setValue((int)adaptador.getInsercioBarres());
+        valor = adaptador.getInsercioBarres();
+        sldBarresControl.setValue((int) adaptador.getInsercioBarres());
         lblPercentarge.setText(adaptador.getInsercioBarres() + "%");
 
         this.adaptador = adaptador;
@@ -47,10 +48,10 @@ public class FrmGestioComponentsCentral extends JDialog {
         configuraBomba(btnBomba2, 2);
         configuraBomba(btnBomba3, 3);
 
-        if(estatReactor) {
+        if (estatReactor) {
             btnActivarReactor.setSelected(true);
             btnDesactivarReactor.setSelected(false);
-        } else{
+        } else {
             btnActivarReactor.setSelected(false);
             btnDesactivarReactor.setSelected(true);
         }
@@ -60,170 +61,91 @@ public class FrmGestioComponentsCentral extends JDialog {
             valor = sldBarresControl.getValue();
         });
 
-        btnIntroduirInsercioBarresControl.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    valor = Float.parseFloat(txtIntroduirInsercioBarresControl.getText().replace(',', '.'));
-                    if (valor >= 0.0f && valor <= 100.0f) {
-                        float valor2 = valor;
-
-                        sldBarresControl.setValue((int)valor);
-                        lblPercentarge.setText(valor2 + "%");
-                        valor = valor2;
-                    } else {
-                        JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                                "El valor ha d'estar entre 0.0 i 100.0",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                            "Has d'introduir un número decimal vàlid.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+        btnIntroduirInsercioBarresControl.addActionListener(e -> {
+            try {
+                valor = Float.parseFloat(txtIntroduirInsercioBarresControl.getText().replace(',', '.'));
+                if (valor >= 0.0f && valor <= 100.0f) {
+                    sldBarresControl.setValue((int) valor);
+                    lblPercentarge.setText(valor + "%");
+                } else {
+                    mostrarError("El valor ha d'estar entre 0.0 i 100.0");
                 }
+            } catch (NumberFormatException ex) {
+                mostrarError("Has d'introduir un número decimal vàlid.");
             }
         });
 
-
-        btnActivarReactor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                estatReactor = true;
-                JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                        "Reactor pendent de ser activat",
-                        "Gestió reactor",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-            }
+        btnActivarReactor.addActionListener(e -> {
+            estatReactor = true;
+            JOptionPane.showMessageDialog(this, "Reactor pendent de ser activat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        btnDesactivarReactor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                estatReactor = false;
-                JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                        "Reactor pendent de ser desactivat",
-                        "Gestió reactor",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
+        btnDesactivarReactor.addActionListener(e -> {
+            estatReactor = false;
+            JOptionPane.showMessageDialog(this, "Reactor pendent de ser desactivat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        btnAplicarModificacions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnAplicarModificacions.addActionListener(e -> {
+            float valorOriginalBarres = adaptador.getInsercioBarres();
+            boolean reactorOriginal = adaptador.getEstatReactor();
+            boolean canviBombes = false;
 
-                float valorOriginalBarres = adaptador.getInsercioBarres();
-                boolean reactorOriginal = adaptador.getEstatReactor();
-                boolean canviBombes = false;
+            boolean canviBarres = valor != valorOriginalBarres;
+            boolean canviReactor = estatReactor != reactorOriginal;
 
-                boolean canviBarres = valor != valorOriginalBarres;
-                boolean canviReactor = estatReactor != reactorOriginal;
-
-                if(bomba0 && !bomba0Orig){
-                    try {
-                        adaptador.activaBomba(0);
-                        canviBombes = true;
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-
-                } else if(bomba0Orig){
-                    adaptador.desactivaBomba(0);
+            try {
+                if (bomba0 != bomba0Orig) {
+                    if (bomba0) adaptador.activaBomba(0);
+                    else adaptador.desactivaBomba(0);
                     canviBombes = true;
                 }
-
-
-                if(bomba1 && !bomba1Orig){
-                    try {
-                        adaptador.activaBomba(1);
-                        canviBombes = true;
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-                } else if(bomba1Orig){
-                    adaptador.desactivaBomba(1);
+                if (bomba1 != bomba1Orig) {
+                    if (bomba1) adaptador.activaBomba(1);
+                    else adaptador.desactivaBomba(1);
                     canviBombes = true;
                 }
-
-
-                if(bomba2 && !bomba2Orig){
-                    try {
-                        adaptador.activaBomba(2);
-                        canviBombes = true;
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-                } else if(bomba2Orig){
-                    adaptador.desactivaBomba(2);
+                if (bomba2 != bomba2Orig) {
+                    if (bomba2) adaptador.activaBomba(2);
+                    else adaptador.desactivaBomba(2);
                     canviBombes = true;
                 }
-
-
-                if(bomba3 && !bomba3Orig){
-                    try {
-                        adaptador.activaBomba(3);
-                        canviBombes = true;
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-                } else if(bomba3Orig){
-                    adaptador.desactivaBomba(3);
+                if (bomba3 != bomba3Orig) {
+                    if (bomba3) adaptador.activaBomba(3);
+                    else adaptador.desactivaBomba(3);
                     canviBombes = true;
-                }
-
-
-                if (!canviBarres && !canviReactor && !canviBombes) {
-                    JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                            "No s'han produït canvis. ",
-                            "Sense canvis",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                    return;
                 }
 
                 if (canviReactor) {
-                    try {
-                        if (estatReactor) {
-                            adaptador.activaReactor();
-                        } else {
-                            adaptador.desactivaReactor();
-                        }
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-
+                    if (estatReactor) adaptador.activaReactor();
+                    else adaptador.desactivaReactor();
                 }
 
                 if (canviBarres) {
-                    try {
-                        adaptador.setInsercioBarres(valor);
-                    } catch (CentralUBException ex) {
-                        mostrarError(ex.getMessage());
-                    }
-
-
+                    adaptador.setInsercioBarres(valor);
                 }
 
-                String missatge = "Modificacions aplicades: " + "\nEstat bombes actualitzat";
+                if (!canviBarres && !canviReactor && !canviBombes) {
+                    JOptionPane.showMessageDialog(this,
+                            "No s'han produït canvis.",
+                            "Sense canvis",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                String missatge = "Modificacions aplicades:";
+                if (canviBombes) missatge += "\nEstat bombes actualitzat";
                 if (canviBarres) missatge += "\nPercentatge de barres: " + valor + "%";
                 if (canviReactor) missatge += "\nReactor " + (estatReactor ? "Activat" : "Desactivat");
 
-                JOptionPane.showMessageDialog(FrmGestioComponentsCentral.this,
-                        missatge,
-                        "Canvis aplicats",
-                        JOptionPane.INFORMATION_MESSAGE);
-                dispose();
+                JOptionPane.showMessageDialog(this, missatge, "Canvis aplicats", JOptionPane.INFORMATION_MESSAGE);
+                // No fem dispose(); es manté la finestra oberta
+
+            } catch (CentralUBException ex) {
+                mostrarError(ex.getMessage());
             }
         });
 
-        btnCancelarModificacions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        btnCancelarModificacions.addActionListener(e -> dispose());
     }
 
     private void configuraBomba(JButton btn, int index) throws CentralUBException {
@@ -268,16 +190,10 @@ public class FrmGestioComponentsCentral extends JDialog {
     }
 
     private void mostrarError(String missatge) {
-        JOptionPane.showMessageDialog(
-                this,
-                missatge,
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this, missatge, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-
     private void createUIComponents() {
-        // TODO: place custom component creation code here
+        // Per si s'han de definir components personalitzats
     }
 }

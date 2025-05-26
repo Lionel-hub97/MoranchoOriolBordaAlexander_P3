@@ -106,7 +106,7 @@ public class Dades implements InDades, Serializable {
             penalitzacio = PENALITZACIO_EXCES_POTENCIA;
         }
         //Barres de control, com no hi ha classe els afegim manualment
-        float costOperatiu = 0;
+        float costOperatiu = 5;
         if(reactor.getActivat()){
             costOperatiu += reactor.getCostOperatiu();
         }
@@ -130,6 +130,7 @@ public class Dades implements InDades, Serializable {
      */
     private void refrigeraReactor() {
         float output = reactor.calculaOutput(insercioBarres); // genera calor
+        System.out.println(output);
         output -= sistemaRefrigeracio.calculaOutput(output); // extreu calor
 
 

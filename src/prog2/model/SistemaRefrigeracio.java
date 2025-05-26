@@ -48,9 +48,7 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
 
-            if(!bomba.getForaDeServei()){
-                bomba.desactiva();
-            }
+            bomba.desactiva();
         }
     }
 
@@ -72,7 +70,7 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(!bomba.getForaDeServei()){
+            if(!bomba.getForaDeServei() && bomba.getActivat()){
                 bomba.revisa(p);
             }
         }
@@ -84,7 +82,7 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(!bomba.getForaDeServei()){
+            if(!bomba.getForaDeServei() && bomba.getActivat()){
                 cost += bomba.getCostOperatiu();
             }
         }
@@ -98,7 +96,7 @@ public class SistemaRefrigeracio implements InComponent, Serializable {
         Iterator<BombaRefrigerant> it = bombesRefrigerants.iterator();
         while(it.hasNext()){
             BombaRefrigerant bomba = it.next();
-            if(!bomba.getForaDeServei()){
+            if(!bomba.getForaDeServei() && bomba.getActivat()){
                 output += bomba.getCapacitat();
 
             }
