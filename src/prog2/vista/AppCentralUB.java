@@ -80,6 +80,23 @@ public class AppCentralUB extends JFrame {
 
             }
         });
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                FrmGuardarDades frmGuardarDades = null;
+
+
+                try {
+                    frmGuardarDades = new FrmGuardarDades(AppCentralUB.this, adaptador);
+                    frmGuardarDades.setVisible(true);
+                } catch (CentralUBException ex) {
+                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+
+            }
+        });
     }
 
     private void actualizarLabelDia() {

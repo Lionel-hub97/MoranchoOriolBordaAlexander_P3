@@ -44,7 +44,7 @@ public class FrmCarregarDades extends JDialog {
         btnCarregarFitxer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomFitxer = txtNomFitxer.getText().replace(',', '.');
+                String nomFitxer = txtNomFitxer.getText();
                 try {
 
                     adaptador.carregaDades(nomFitxer);

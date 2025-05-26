@@ -86,7 +86,7 @@ public class Adaptador {
 
     public void guardaDades(String camiDesti) throws CentralUBException {
         ObjectOutputStream sortida = null;
-        String filename = camiDesti + ".dat";
+        String filename = camiDesti.endsWith(".dat") ? camiDesti : camiDesti + ".dat";
 
         try {
             FileOutputStream fitxer = new FileOutputStream(filename);
@@ -94,7 +94,7 @@ public class Adaptador {
 
             sortida.writeObject(dades);
 
-            System.out.println("S'han guardat les dades correctament al fitxer: " + camiDesti);
+
         } catch (IOException e) {
             throw new CentralUBException("No s'han pogut desar les dades degut a un error d'entrada/sortida: " + e.getMessage());
         } finally {

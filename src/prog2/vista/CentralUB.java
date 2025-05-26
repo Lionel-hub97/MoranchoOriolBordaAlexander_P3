@@ -98,7 +98,9 @@ public class CentralUB {
                         case GUARDAR_DADES:
                             System.out.println("Indica el nom de fitxer: ");
                             try {
-                                adaptador.guardaDades(sc.nextLine());
+                                String nomFitxer = sc.nextLine();
+                                adaptador.guardaDades(nomFitxer);
+                                System.out.println("S'han guardat les dades correctament al fitxer: " + nomFitxer);
                             } catch (CentralUBException e) {
                                 System.err.println(e.getMessage());
                             }
