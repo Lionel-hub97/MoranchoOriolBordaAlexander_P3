@@ -48,7 +48,8 @@ public class AppCentralUB extends JFrame {
                     dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
                     dialog.setVisible(true);
                 } catch (CentralUBException ex) {
-                    System.err.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
                 }
 
 

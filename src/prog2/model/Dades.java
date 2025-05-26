@@ -130,7 +130,7 @@ public class Dades implements InDades, Serializable {
      */
     private void refrigeraReactor() {
         float output = reactor.calculaOutput(insercioBarres); // genera calor
-        System.out.println(output);
+
         output -= sistemaRefrigeracio.calculaOutput(output); // extreu calor
 
 
@@ -160,6 +160,9 @@ public class Dades implements InDades, Serializable {
         return reactor.getActivat();
     }
 
+    public float getTemperatura(){
+        return reactor.getTemperatura();
+    }
     public Bitacola finalitzaDia(float demandaPotencia) {
 
 
@@ -262,6 +265,18 @@ public class Dades implements InDades, Serializable {
 
             if(bomba.getId() == id){
                 return bomba.getActivat();
+
+            }
+        }
+        throw new CentralUBException("Bomba inexistent.");
+    }
+    public boolean getForaDeServeiBomba(int id) throws CentralUBException {
+        Iterator<BombaRefrigerant> it = sistemaRefrigeracio.getBombesRefrigerants().iterator();
+        while(it.hasNext()){
+            BombaRefrigerant bomba = it.next();
+
+            if(bomba.getId() == id){
+                return bomba.getForaDeServei();
 
             }
         }

@@ -136,4 +136,12 @@ public class Adaptador {
         return dades.getEstatBomba(id);
     }
 
+    public float getTemperatura() throws CentralUBException {
+        return dades.getTemperatura();
+    }
+
+    public boolean getForaDeServeiBomba(int id) throws CentralUBException {
+        return dades.getForaDeServeiBomba(id);
+    }
+
 }

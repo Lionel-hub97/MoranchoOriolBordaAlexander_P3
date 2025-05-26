@@ -21,6 +21,8 @@ public class FrmGestioComponentsCentral extends JDialog {
     private JButton btnBomba3;
     private JButton btnBomba2;
     private JButton btnBomba1;
+    private JButton btnElementsForaServei;
+
     private Adaptador adaptador;
     private boolean bomba0, bomba1, bomba2, bomba3;
     private boolean bomba0Orig, bomba1Orig, bomba2Orig, bomba3Orig;
@@ -54,7 +56,14 @@ public class FrmGestioComponentsCentral extends JDialog {
         } else {
             btnActivarReactor.setSelected(false);
             btnDesactivarReactor.setSelected(true);
+
         }
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+
+
+
+
 
         sldBarresControl.addChangeListener(e -> {
             lblPercentarge.setText(sldBarresControl.getValue() + "%");
@@ -76,13 +85,40 @@ public class FrmGestioComponentsCentral extends JDialog {
         });
 
         btnActivarReactor.addActionListener(e -> {
-            estatReactor = true;
-            JOptionPane.showMessageDialog(this, "Reactor pendent de ser activat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                if(adaptador.getTemperatura() > 1000) {
+                    mostrarError("No es pot activar el reactor mentre es superi la temperatura màxima de 1.000 graus.");
+
+                }
+                else if(adaptador.getEstatReactor()) {
+                    JOptionPane.showMessageDialog(this, "El reactor ja estava activat.", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+
+
+                }
+                else{
+                    estatReactor = true;
+                    JOptionPane.showMessageDialog(this, "Reactor pendent de ser activat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
+            } catch (CentralUBException ex) {
+                mostrarError(ex.getMessage());
+            }
+
         });
 
         btnDesactivarReactor.addActionListener(e -> {
-            estatReactor = false;
-            JOptionPane.showMessageDialog(this, "Reactor pendent de ser desactivat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+            if(!adaptador.getEstatReactor()) {
+                JOptionPane.showMessageDialog(this, "El reactor ja estava desactivat.", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+
+
+            }
+            else{
+                estatReactor = false;
+                JOptionPane.showMessageDialog(this, "Reactor pendent de ser desactivat", "Gestió reactor", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
         });
 
         btnAplicarModificacions.addActionListener(e -> {
@@ -146,6 +182,56 @@ public class FrmGestioComponentsCentral extends JDialog {
         });
 
         btnCancelarModificacions.addActionListener(e -> dispose());
+        btnElementsForaServei.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder missatge = new StringBuilder("Elements fora de servei:");
+
+                boolean algunForaServei = false;
+
+                try {
+                    // Comprovació del reactor
+                    if (adaptador.getTemperatura() > 1000) {
+                        missatge.append("\n- Reactor");
+                        algunForaServei = true;
+                    }
+
+                    // Comprovació de les bombes
+                    if (adaptador.getForaDeServeiBomba(0)) {
+                        missatge.append("\n- Bomba 1");
+                        algunForaServei = true;
+                    }
+                    if (adaptador.getForaDeServeiBomba(1)) {
+                        missatge.append("\n- Bomba 2");
+                        algunForaServei = true;
+                    }
+                    if (adaptador.getForaDeServeiBomba(2)) {
+                        missatge.append("\n- Bomba 3");
+                        algunForaServei = true;
+                    }
+                    if (adaptador.getForaDeServeiBomba(3)) {
+                        missatge.append("\n- Bomba 4");
+                        algunForaServei = true;
+                    }
+
+                    // Si no hi ha res fora de servei
+                    if (!algunForaServei) {
+                        missatge = new StringBuilder("Tots els components estan actius.");
+                    }
+
+                    JOptionPane.showMessageDialog(
+                            FrmGestioComponentsCentral.this,
+                            missatge.toString(),
+                            "Estat components",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+
+                } catch (CentralUBException ex) {
+                    mostrarError(ex.getMessage());
+                }
+            }
+        });
+
     }
 
     private void configuraBomba(JButton btn, int index) throws CentralUBException {

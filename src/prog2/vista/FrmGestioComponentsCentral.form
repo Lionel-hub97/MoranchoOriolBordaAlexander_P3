@@ -151,6 +151,14 @@
               </grid>
             </children>
           </grid>
+          <component id="f9987" class="javax.swing.JButton" binding="btnElementsForaServei">
+            <constraints>
+              <grid row="0" column="4" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="MostrarElements fora de servei"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
