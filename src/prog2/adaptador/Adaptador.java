@@ -110,21 +110,17 @@ public class Adaptador {
 
 
     public void carregaDades(String camiOrigen) throws CentralUBException {
-        try {
-            FileInputStream fitxer = new FileInputStream(camiOrigen);
-            ObjectInputStream entrada = new ObjectInputStream(fitxer);
+        String filename = camiOrigen.endsWith(".dat") ? camiOrigen : camiOrigen + ".dat";
 
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(filename))) {
             Object obj = entrada.readObject();
 
             if (obj instanceof Dades dadesCarregades) {
                 this.dades = dadesCarregades;
-                System.out.println("Dades carregades des de: " + camiOrigen);
+
             } else {
                 throw new CentralUBException("El fitxer no conté dades vàlides per a aquesta aplicació.");
             }
-
-            entrada.close();
-            fitxer.close();
         } catch (IOException | ClassNotFoundException e) {
             throw new CentralUBException("Error durant la càrrega de dades: " + e.getMessage());
         }

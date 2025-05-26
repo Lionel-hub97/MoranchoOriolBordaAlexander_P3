@@ -66,6 +66,15 @@ public class AppCentralUB extends JFrame {
             finalitzaDia();           // Avanza el día en el adaptador (como antes en consola)
             actualizarLabelDia();     // Refresca el label con el nuevo número de día
         });
+        btnCarregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarregarDades carregarDades = null;
+
+                carregarDades = new CarregarDades(AppCentralUB.this, adaptador);
+                carregarDades.setVisible(true);
+            }
+        });
     }
 
     private void actualizarLabelDia() {
