@@ -75,6 +75,11 @@ public class AppCentralUB extends JFrame {
                 try {
                     frmcarregarDades = new FrmCarregarDades(AppCentralUB.this, adaptador);
                     frmcarregarDades.setVisible(true);
+
+                    actualizarLabelDia();
+                    actualizarLabelDemanda();
+                    actualizarLabelGuanys();
+
                 } catch (CentralUBException ex) {
                     JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
