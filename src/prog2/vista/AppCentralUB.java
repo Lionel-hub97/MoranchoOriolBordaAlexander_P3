@@ -33,7 +33,7 @@ public class AppCentralUB extends JFrame {
         setTitle("Prova GUI");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(panelAppCentral); // IMPORTANT: perquè es mostri el que has dissenyat al .form
-        setSize(800, 600);
+        setSize(700, 600);
         setLocationRelativeTo(null); // Centra la finestra a la pantalla
 
         actualizarLabelDia();  // Actualiza el label al inicio

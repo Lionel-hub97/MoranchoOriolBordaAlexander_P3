@@ -21,7 +21,7 @@ public class FrmVisualitzarInformacio extends JDialog {
 
         setContentPane(contentPane);
         setModal(true);
-        setSize(700, 500);
+        setSize(600, 500);
         setLocationRelativeTo(parent);
 
         configurarComboBox();
