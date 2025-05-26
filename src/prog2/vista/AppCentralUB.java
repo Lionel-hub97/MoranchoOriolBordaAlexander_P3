@@ -3,12 +3,12 @@ package prog2.vista;
 import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AppCentralUB extends JFrame {
-    // Atribut creat automàticament a partir del .form:
-
+    // Components del .form
     private JPanel panelAppCentral;
     private JButton btnGestioComponentsCentral;
     private JButton btnVisualitzarInformacio;
@@ -18,93 +18,104 @@ public class AppCentralUB extends JFrame {
     private JLabel lblGuanyAcumulat;
     private JButton btnGuardar;
     private JButton btnCarregar;
-    private Adaptador adaptador;
+    private JCheckBox chkModeEstetic;
 
+    // Altres atributs
+    private Adaptador adaptador;
     private VariableNormal variableNormal;
     private float demandaPotencia;
 
-    // Constructor on configures la finestra
+    // Constructor
     public AppCentralUB() {
         adaptador = new Adaptador();
-
-        variableNormal = new VariableNormal(1000, 800, 123);  // mismos valores que en consola
-        demandaPotencia = generaDemandaPotencia();  // primer valor del día
+        variableNormal = new VariableNormal(1000, 800, 123);
+        demandaPotencia = generaDemandaPotencia();
 
         setTitle("Prova GUI");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(panelAppCentral); // IMPORTANT: perquè es mostri el que has dissenyat al .form
+        setContentPane(panelAppCentral);
         setSize(700, 600);
-        setLocationRelativeTo(null); // Centra la finestra a la pantalla
+        setLocationRelativeTo(null);
 
-        actualizarLabelDia();  // Actualiza el label al inicio
+        actualizarLabelDia();
         actualizarLabelDemanda();
         actualizarLabelGuanys();
 
-        btnGestioComponentsCentral.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmGestioComponentsCentral dialog = null;
-                try {
-                    dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
-                    dialog.setVisible(true);
-                } catch (CentralUBException ex) {
-                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
-                }
-
-
+        btnGestioComponentsCentral.addActionListener(e -> {
+            try {
+                FrmGestioComponentsCentral dialog = new FrmGestioComponentsCentral(AppCentralUB.this, adaptador);
+                dialog.setVisible(true);
+            } catch (CentralUBException ex) {
+                JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        btnVisualitzarInformacio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmVisualitzarInformacio.mostrarDialog(AppCentralUB.this, adaptador);
-            }
-        });
+        btnVisualitzarInformacio.addActionListener(e -> FrmVisualitzarInformacio.mostrarDialog(AppCentralUB.this, adaptador));
 
         btnFinalitzarDia.addActionListener(e -> {
-            finalitzaDia();           // Avanza el día en el adaptador (como antes en consola)
-            actualizarLabelDia();     // Refresca el label con el nuevo número de día
+            finalitzaDia();
+            actualizarLabelDia();
         });
-        btnCarregar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmCarregarDades frmcarregarDades = null;
 
-                try {
-                    frmcarregarDades = new FrmCarregarDades(AppCentralUB.this, adaptador);
-                    frmcarregarDades.setVisible(true);
-
-                    actualizarLabelDia();
-                    actualizarLabelDemanda();
-                    actualizarLabelGuanys();
-
-                } catch (CentralUBException ex) {
-                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-
+        btnCarregar.addActionListener(e -> {
+            try {
+                FrmCarregarDades frmcarregarDades = new FrmCarregarDades(AppCentralUB.this, adaptador);
+                frmcarregarDades.setVisible(true);
+                actualizarLabelDia();
+                actualizarLabelDemanda();
+                actualizarLabelGuanys();
+            } catch (CentralUBException ex) {
+                JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-        btnGuardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                FrmGuardarDades frmGuardarDades = null;
+        btnGuardar.addActionListener(e -> {
+            try {
+                FrmGuardarDades frmGuardarDades = new FrmGuardarDades(AppCentralUB.this, adaptador);
+                frmGuardarDades.setVisible(true);
+            } catch (CentralUBException ex) {
+                JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
+        // 🎨 Mode estètic activat/desactivat
+        chkModeEstetic.addActionListener(e -> {
+            boolean activat = chkModeEstetic.isSelected();
 
-                try {
-                    frmGuardarDades = new FrmGuardarDades(AppCentralUB.this, adaptador);
-                    frmGuardarDades.setVisible(true);
-                } catch (CentralUBException ex) {
-                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            // Colors estètics
+            Color fonsBonic = new Color(230, 240, 255); // Blau clar
+            Color botoBonic = new Color(80, 120, 200);  // Blau fosc
+            Color textBlanc = Color.WHITE;
+
+            JButton[] botons = {
+                    btnGestioComponentsCentral,
+                    btnVisualitzarInformacio,
+                    btnFinalitzarDia,
+                    btnGuardar,
+                    btnCarregar
+            };
+
+            if (activat) {
+                panelAppCentral.setBackground(fonsBonic);
+                for (JButton boto : botons) {
+                    boto.setBackground(botoBonic);
+                    boto.setForeground(textBlanc);
+                    boto.setFocusPainted(false);
+                    boto.setBorderPainted(false);
                 }
-
-
+            } else {
+                panelAppCentral.setBackground(null);
+                for (JButton boto : botons) {
+                    boto.setBackground(null);
+                    boto.setForeground(null);
+                    boto.setFocusPainted(true);
+                    boto.setBorderPainted(true);
+                }
             }
         });
     }
 
+    // Mètodes auxiliars
     private void actualizarLabelDia() {
         lblNumDia.setText("Dia: " + adaptador.getDia());
     }
@@ -128,20 +139,11 @@ public class AppCentralUB extends JFrame {
         String info = adaptador.finalitzaDia(demandaPotencia);
         JOptionPane.showMessageDialog(this, info, "Dia finalitzat", JOptionPane.INFORMATION_MESSAGE);
 
-        demandaPotencia = generaDemandaPotencia();  // nueva demanda
-
-        // Actualizamos los labels
+        demandaPotencia = generaDemandaPotencia();
         actualizarLabelDia();
         actualizarLabelDemanda();
-        actualizarLabelGuanys(); // si tienes ganancias acumuladas
+        actualizarLabelGuanys();
     }
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////     MAIN     ////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
