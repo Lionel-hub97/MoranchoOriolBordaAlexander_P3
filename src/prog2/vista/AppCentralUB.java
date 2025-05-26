@@ -69,10 +69,15 @@ public class AppCentralUB extends JFrame {
         btnCarregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarregarDades carregarDades = null;
+                FrmCarregarDades frmcarregarDades = null;
 
-                carregarDades = new CarregarDades(AppCentralUB.this, adaptador);
-                carregarDades.setVisible(true);
+                try {
+                    frmcarregarDades = new FrmCarregarDades(AppCentralUB.this, adaptador);
+                    frmcarregarDades.setVisible(true);
+                } catch (CentralUBException ex) {
+                    JOptionPane.showMessageDialog(AppCentralUB.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }

@@ -7,19 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class CarregarDades extends JFrame {
+public class FrmCarregarDades extends JDialog {
+    private JPanel contentPane;
+    private JButton btnCarregarFitxer;
+    private JButton btnCancelar;
     private JTextField txtNomFitxer;
     private JButton btnSelecciona;
-    private JPanel contentPanel;
-    private JButton btnCarregarFitxer;
 
-    public CarregarDades(JFrame parent, Adaptador adaptador)  {
+    public FrmCarregarDades(JFrame parent, Adaptador adaptador) throws CentralUBException {
+        super(parent, "Carregar Dades");
+        setContentPane(contentPane);
 
-        setContentPane(contentPanel);
-
-        setSize(600, 350);
+        setSize(350, 200);
         setLocationRelativeTo(parent);
-        setTitle("Carregar Dades");
+        setModal(true);
         btnSelecciona.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,7 +30,7 @@ public class CarregarDades extends JFrame {
                 //Mostrem la finestra de dialeg
                 //Resultat emmagazema una constant que indica si s’ha
                 //seleccionat o no un fitxer
-                int resultat = seleccio.showOpenDialog(CarregarDades.this);
+                int resultat = seleccio.showOpenDialog(FrmCarregarDades.this);
                 //Assegurem que hi hagi un fitxer seleccionat
                 if (resultat == JFileChooser.APPROVE_OPTION) {
                     //Obtenim el fitxer
@@ -47,7 +48,7 @@ public class CarregarDades extends JFrame {
                 try {
 
                     adaptador.carregaDades(nomFitxer);
-                    JOptionPane.showMessageDialog(CarregarDades.this, "Dades carregades des de: " + nomFitxer + ".");
+                    JOptionPane.showMessageDialog(FrmCarregarDades.this, "Dades carregades des de: " + nomFitxer + ".");
                     dispose();
                 } catch (CentralUBException ex) {
                     mostrarError(ex.getMessage());
@@ -56,6 +57,12 @@ public class CarregarDades extends JFrame {
         });
 
 
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
     private void mostrarError(String missatge) {
         JOptionPane.showMessageDialog(this, missatge, "Error", JOptionPane.ERROR_MESSAGE);
